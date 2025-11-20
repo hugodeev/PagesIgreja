@@ -5,12 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igreja - ADPT</title>
-    
-    <!-- Google Maps API -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_API&callback=initMap">
-    </script>
-    
     <style>
         /* Reset e estilos básicos */
         * {
@@ -587,6 +581,7 @@
     </style>
 </head>
 
+
 <body>
     <!-- Header Transparente -->
     <header id="mainHeader">
@@ -740,8 +735,10 @@
             </div>
             
             <div class="map-container">
-                <!-- Mapa do Google Maps -->
-                <div id="map" style="width:100%;height:100%;"></div>
+                <!-- Mapa placeholder - em um site real, você usaria uma API como Google Maps -->
+                <div style="width:100%;height:100%;background-color:#eee;display:flex;align-items:center;justify-content:center;">
+                    <p>Mapa da Localização da Igreja</p>
+                </div>
             </div>
         </div>
     </section>
@@ -845,112 +842,6 @@
                 indicator.className = 'status-indicator status-closed';
                 dot.className = 'status-dot closed-dot';
             }
-        }
-        
-        // Google Maps Integration
-        function initMap() {
-            // Coordenadas da Igreja Assembleia de Deus em Tacima-PB
-            const churchLocation = { lat: -6.4883, lng: -35.6369 }; // Coordenadas aproximadas de Tacima-PB
-            
-            // Criar o mapa
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: churchLocation,
-                styles: [
-                    {
-                        "featureType": "all",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f5f5f5" }]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{ "gamma": 0.01 }, { "lightness": 20 }]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [{ "saturation": -31 }, { "lightness": -33 }, { "weight": 2 }, { "gamma": 0.8 }]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.icon",
-                        "stylers": [{ "visibility": "off" }]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#a7a7a7" }]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#e3e3e3" }]
-                    },
-                    {
-                        "featureType": "poi",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f5f5f5" }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "color": "#ffffff" }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.stroke",
-                        "stylers": [{ "color": "#b3b3b3" }]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#ffffff" }]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#ffffff" }]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#a0d0ff" }]
-                    }
-                ]
-            });
-            
-            // Criar o marcador
-            const marker = new google.maps.Marker({
-                position: churchLocation,
-                map: map,
-                title: "Igreja Assembleia de Deus em Tacima-PB",
-                icon: {
-                    url: "data:image/svg+xml;base64," + btoa(`
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="20" r="18" fill="#1a4b8c" stroke="white" stroke-width="2"/>
-                            <path d="M20 10L25 15H15L20 10Z" fill="white"/>
-                            <rect x="15" y="15" width="10" height="10" fill="white"/>
-                            <rect x="17" y="25" width="6" height="8" fill="white"/>
-                        </svg>
-                    `),
-                    scaledSize: new google.maps.Size(40, 40)
-                }
-            });
-            
-            // Info Window
-            const infoWindow = new google.maps.InfoWindow({
-                content: `
-                    <div style="padding: 10px;">
-                        <h3 style="margin: 0 0 5px 0; color: #1a4b8c;">Igreja Assembleia de Deus</h3>
-                        <p style="margin: 0; font-size: 14px;">Praça João Ferreira da Silva, 317<br>Centro, Tacima - PB</p>
-                    </div>
-                `
-            });
-            
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
         }
         
         // Atualizar o status quando a página carregar
