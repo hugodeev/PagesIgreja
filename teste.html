@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +21,10 @@
             --dark-color: #333;
             --success-color: #28a745;
             --danger-color: #dc3545;
+            --news-bg: #ffffff;
+            --news-border: #e0e0e0;
+            --news-date: #666;
+            --news-title: #1a4b8c;
         }
         
         body {
@@ -44,7 +47,7 @@
         
         /* Header Transparente */
         header {
-            background-color: rgba(26, 75, 140, 0.148); /* 80% transparente */
+            background-color: rgba(26, 75, 140, 0.148);
             color: white;
             padding: 1rem 0;
             position: fixed;
@@ -52,11 +55,11 @@
             top: 0;
             z-index: 1000;
             transition: background-color 0.3s ease;
-            backdrop-filter: blur(30px); /* Efeito de vidro fosco */
+            backdrop-filter: blur(30px);
         }
         
         header.scrolled {
-            background-color: rgba(26, 75, 140, 0.95); /* Mais opaco quando scroll */
+            background-color: rgba(26, 75, 140, 0.95);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
@@ -74,10 +77,6 @@
         .logo h1 {
             font-size: 1.5rem;
             margin-left: 10px;
-        }
-        
-        .logo-icon {
-            font-size: 2rem;
         }
         
         /* Menu Desktop */
@@ -124,12 +123,12 @@
             transition: all 0.3s ease;
         }
         
-        /* Menu Mobile Lateral - 80% da tela */
+        /* Menu Mobile Lateral */
         .mobile-nav {
             position: fixed;
             top: 0;
-            right: -100%; /* Começa fora da tela */
-            width: 80%; /* Ocupa 80% da largura */
+            right: -100%;
+            width: 80%;
             height: 100vh;
             background-color: rgba(26, 75, 140, 0.95);
             box-shadow: -5px 0 15px rgba(0,0,0,0.1);
@@ -213,7 +212,7 @@
             display: block;
         }
         
-        /* Hero Section Expandida */
+        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0, 0, 0, 0.802)), 
                         url('src/img/Igrejaadpb.jpg') 
@@ -369,65 +368,365 @@
         .about-image:hover img {
             transform: scale(1.05);
         }
-        
-        /* Events Section */
-        .events-section {
+
+        /* Services Section - Cultos da Semana */
+        .services-section {
             padding: 5rem 0;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
-        
-        .events-grid {
+
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .event-card {
-            background: white;
+
+        .service-card {
+            background: var(--news-bg);
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-        }
-        
-        .event-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        
-        .event-image {
-            height: 220px;
+            border-left: 5px solid var(--primary-color);
+            position: relative;
             overflow: hidden;
         }
-        
-        .event-image img {
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        .service-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .service-time {
+            background: var(--light-color);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .service-time::before {
+            content: '🕒';
+            font-size: 1.2rem;
+        }
+
+        .service-description {
+            color: var(--dark-color);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--news-date);
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--success-color);
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .today-highlight {
+            background: linear-gradient(135deg, var(--primary-color), #2c5fa3) !important;
+            color: white;
+            position: relative;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(26, 75, 140, 0.3);
+        }
+
+        .today-highlight .service-title,
+        .today-highlight .service-description,
+        .today-highlight .service-features li {
+            color: white;
+        }
+
+        .today-highlight .service-features li::before {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .today-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        /* News/Events Section - Estilo Prefeitura */
+        .news-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .news-header h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .news-filter {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .main-news {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .featured-news {
+            background: var(--news-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .featured-news:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .featured-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
-        
-        .event-card:hover .event-image img {
-            transform: scale(1.1);
+
+        .featured-news:hover .featured-image img {
+            transform: scale(1.05);
         }
-        
-        .event-content {
+
+        .featured-content {
             padding: 2rem;
         }
-        
-        .event-date {
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
+
+        .news-date {
+            color: var(--news-date);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .event-title {
-            font-size: 1.4rem;
+
+        .news-date::before {
+            content: '📅';
+        }
+
+        .featured-content h3 {
+            color: var(--news-title);
+            font-size: 1.5rem;
             margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .featured-content p {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        .secondary-news {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .news-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: var(--news-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .sidebar-card h4 {
+            color: var(--news-title);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .news-list {
+            list-style: none;
+        }
+
+        .news-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--news-border);
+        }
+
+        .news-list li:last-child {
+            border-bottom: none;
+        }
+
+        .news-list a {
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .news-list a:hover {
             color: var(--primary-color);
         }
-        
+
+        .news-list .date {
+            color: var(--news-date);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .news-item {
+            background: var(--news-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .news-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .news-item h4 {
+            color: var(--news-title);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .news-item p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--news-date);
+        }
+
         /* Contact Section */
         .contact-section {
             padding: 5rem 0;
@@ -462,11 +761,20 @@
             margin-right: 1.5rem;
         }
         
+        /* Estilos para o Mapa Incorporado */
         .map-container {
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             height: 400px;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
         
         /* Footer */
@@ -554,11 +862,51 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .secondary-news {
+                grid-template-columns: 1fr;
+            }
+
+            .news-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .news-filter {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .today-highlight {
+                transform: none;
+            }
         }
         
         @media (max-width: 480px) {
             .mobile-nav {
-                width: 85%; /* Um pouco mais em telas muito pequenas */
+                width: 85%;
             }
             
             .logo h1 {
@@ -577,10 +925,25 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 1rem;
             }
+            
+            .map-container {
+                height: 250px;
+            }
+
+            .featured-image {
+                height: 200px;
+            }
+
+            .featured-content {
+                padding: 1.5rem;
+            }
+
+            .featured-content h3 {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
-
 
 <body>
     <!-- Header Transparente -->
@@ -594,8 +957,9 @@
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="#home">Início</a></li>
+                    <li><a href="#news">Notícias</a></li>
+                    <li><a href="#services">Cultos</a></li>
                     <li><a href="#about">Sobre</a></li>
-                    <li><a href="#events">Eventos</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
@@ -622,8 +986,9 @@
         </div>
         <ul>
             <li><a href="#home">Início</a></li>
+            <li><a href="#news">Notícias</a></li>
+            <li><a href="#services">Cultos</a></li>
             <li><a href="#about">Sobre</a></li>
-            <li><a href="#events">Eventos</a></li>
             <li><a href="#contact">Contato</a></li>
         </ul>
     </nav>
@@ -633,13 +998,234 @@
         <div class="container hero-content">
             <h2>Bem-vindo à Igreja Assembleia de Deus em Tacima-PB</h2>
             <p>Uma comunidade de fé, esperança e amor. Junte-se a nós em nossas celebrações e atividades.</p>
-            <a href="#events" class="btn">Ver Próximos Eventos</a>
+            <a href="#services" class="btn">Ver Horários de Cultos</a>
             
             <!-- Status na Hero Section -->
             <div class="hero-status">
                 <div class="status-indicator status-open">
                     <span class="status-dot open-dot"></span>
                     <span id="status-text">Aberto Agora</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - Cultos da Semana -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 class="section-title">Cultos da Semana</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: var(--dark-color); max-width: 800px; margin-left: auto; margin-right: auto;">
+                Participe dos nossos cultos durante a semana. Temos programações especiais para todas as idades e necessidades espirituais.
+            </p>
+            
+            <div class="services-grid">
+                <!-- Domingo -->
+                <div class="service-card" id="domingo-card">
+                    <div class="service-icon">🙏</div>
+                    <h3 class="service-title">Domingo</h3>
+                    <div class="service-time">19:00 - 21:00</div>
+                    <p class="service-description">Culto de Celebração e Santa Ceia. Um momento especial de adoração e comunhão com toda a família.</p>
+
+                </div>
+
+                <!-- Segunda-feira -->
+                <div class="service-card" id="segunda-card">
+                    <div class="service-icon">🌟</div>
+                    <h3 class="service-title">Segunda-feira</h3>
+                    <div class="service-time">19:00 - 20:30</div>
+                    <p class="service-description">Culto de Ensino Bíblico. Estudos profundos da Palavra de Deus para crescimento espiritual.</p>
+                    <ul class="service-features">
+                        <li>Estudo Bíblico Expositivo</li>
+                        <li>Discipulado</li>
+                        <li>Perguntas e Respostas</li>
+                    </ul>
+                </div>
+
+                <!-- Terça-feira -->
+                <div class="service-card" id="terca-card">
+                    <div class="service-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="service-title">Terça-feira</h3>
+                    <div class="service-time">19:00 - 21:00</div>
+                    <p class="service-description">Culto da Família. Momentos especiais dedicados à edificação das famílias.</p>
+                    <ul class="service-features">
+                        <li>Palestras para Casais</li>
+                        <li>Atividades para Jovens</li>
+                        <li>Programação Infantil</li>
+                    </ul>
+                </div>
+
+                <!-- Quarta-feira -->
+                <div class="service-card" id="quarta-card">
+                    <div class="service-icon">🔥</div>
+                    <h3 class="service-title">Quarta-feira</h3>
+                    <div class="service-time">19:00 - 21:00</div>
+                    <p class="service-description">Culto de Oração e Milagres. Momento poderoso de busca pela presença de Deus.</p>
+                    <ul class="service-features">
+                        <li>Oração Intercessória</li>
+                        <li>Testemunhos</li>
+                        <li>Milagres e Curas</li>
+                    </ul>
+                </div>
+
+                <!-- Quinta-feira -->
+                <div class="service-card" id="quinta-card">
+                    <div class="service-icon">🎵</div>
+                    <h3 class="service-title">Quinta-feira</h3>
+                    <div class="service-time">19:00 - 20:30</div>
+                    <p class="service-description">Ensaio do Coral e Grupos de Louvor. Preparação para os cultos de domingo.</p>
+                    <ul class="service-features">
+                        <li>Ensaio do Coral Adulto</li>
+                        <li>Prática de Instrumentos</li>
+                        <li>Escola de Música</li>
+                    </ul>
+                </div>
+
+                <!-- Sexta-feira -->
+                <div class="service-card" id="sexta-card">
+                    <div class="service-icon">🙌</div>
+                    <h3 class="service-title">Sexta-feira</h3>
+                    <div class="service-time">19:00 - 21:00</div>
+                    <p class="service-description">Culto de Jovens e Adolescentes. Programação dinâmica e relevante para a juventude.</p>
+                    <ul class="service-features">
+                        <li>Louvor Jovem</li>
+                        <li>Palestras Atuais</li>
+                        <li>Dinâmicas e Games</li>
+                    </ul>
+                </div>
+
+                <!-- Sábado -->
+                <div class="service-card" id="sabado-card">
+                    <div class="service-icon">🤝</div>
+                    <h3 class="service-title">Sábado</h3>
+                    <div class="service-time">15:00 - 17:00</div>
+                    <p class="service-description">Visitação e Evangelismo. Saímos pelas ruas para compartilhar o amor de Cristo.</p>
+                    <ul class="service-features">
+                        <li>Visitação a Enfermos</li>
+                        <li>Evangelismo de Rua</li>
+                        <li>Distribuição de Folhetos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section - Estilo Prefeitura -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <div class="news-header">
+                <h2>Notícias e Eventos</h2>
+                <div class="news-filter">
+                    <button class="filter-btn active">Todos</button>
+                    <button class="filter-btn">Eventos</button>
+                    <button class="filter-btn">Notícias</button>
+                    <button class="filter-btn">Cultos</button>
+                </div>
+            </div>
+
+            <div class="news-grid">
+                <div class="main-news">
+                    <!-- Notícia em Destaque -->
+                    <div class="featured-news">
+                        <div class="featured-image">
+                            <img src="src/img/logoenem.jpg" alt="ENEM Bíblico">
+                        </div>
+                        <div class="featured-content">
+                            <div class="news-date">04 de Janeiro de 2025</div>
+                            <h3>ENEM Bíblico 2025 - Inscrições Abertas</h3>
+                            <p>Participe do nosso ENEM Bíblico na Assembleia de Deus em Tacima-PB. Uma oportunidade única para testar seus conhecimentos bíblicos e aprender mais sobre a palavra de Deus. Evento gratuito e aberto a toda comunidade.</p>
+                            <div class="news-meta">
+                                <a href="#" class="read-more">
+                                    Ler mais 
+                                    <span>→</span>
+                                </a>
+                                <span>Evento</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notícias Secundárias -->
+                    <div class="secondary-news">
+                        <div class="news-item">
+                            <h4>Ar-Condicionados Adquiridos - 2025</h4>
+                            <p>Com grande alegria informamos que os novos ar-condicionados para o nosso templo já foram adquiridos! Em breve teremos um ambiente mais climatizado e confortável para todos os irmãos durante os cultos e atividades.</p>
+                            <div class="news-meta">
+                                <a href="#" class="read-more">
+                                    Ler mais 
+                                    <span>→</span>
+                                </a>
+                                <span>Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="news-item">
+                            <h4>Campanha do Carro Missionário - 2025</h4>
+                            <p>Junte-se a nós nesta campanha para adquirir um carro que será uma ferramenta poderosa na obra de Deus! O veículo será usado para: visitas pastorais, evangelismo, transporte de irmãos para cultos e auxílio em ações sociais. Cada contribuição nos aproxima deste objetivo!</p>
+                            <div class="news-meta">
+                                <a href="#" class="read-more">
+                                    Ler mais 
+                                    <span>→</span>
+                                </a>
+                                <span>Campanha</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="news-sidebar">
+                    <div class="sidebar-card">
+                        <h4>Próximos Eventos</h4>
+                        <ul class="news-list">
+                            <li>
+                                <a href="#">
+                                    <span>Culto de Ano Novo</span>
+                                    <span class="date">31/12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Ensaio do Coral</span>
+                                    <span class="date">12/12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Escola Bíblica</span>
+                                    <span class="date">Todos os domingos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Culto de Oração</span>
+                                    <span class="date">Quartas 19h</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Notícias Recentes</h4>
+                        <ul class="news-list">
+                            <li>
+                                <a href="#">
+                                    <span>ENEM Bíblico - Inscrições Abertas</span>
+                                    <span class="date">04/01/26</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Campanha do Carro Missionário</span>
+                                    <span class="date">31/12/25</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Aquisição de Ar-Condicionados</span>
+                                    <span class="date">15/04/25</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -658,47 +1244,6 @@
                 </div>
                 <div class="about-image">
                     <img src="src/img/Oficial igreja .jpg" alt="Interior da Igreja">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events Section -->
-    <section class="events-section" id="events">
-        <div class="container">
-            <h2 class="section-title">Próximos Eventos</h2>
-            <div class="events-grid">
-                <div class="event-card">
-                    <div class="event-image">
-                        <img src="src/img/logoenem.jpg" alt="Coral de Natal">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">04 de Janeiro, 2025 - 13h às 17h30</div>
-                        <h3 class="event-title">ENEM - Bíblico</h3>
-                        <p>Participe do nosso ENEM Bíblico na assembleia de Deus em Tacima-PB. Aberto a todos os interessados.</p>
-                    </div>
-                </div>
-                
-                <div class="event-card">
-                    <div class="event-image">
-                        <img src="https://source.unsplash.com/random/600x400/?charity" alt="Campanha do Agasalho">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">20 de Dezembro, 2023 - 14h</div>
-                        <h3 class="event-title">Campanha do Agasalho</h3>
-                        <p>Doe agasalhos e cobertores para famílias necessitadas durante o inverno.</p>
-                    </div>
-                </div>
-                
-                <div class="event-card">
-                    <div class="event-image">
-                        <img src="https://source.unsplash.com/random/600x400/?celebration" alt="Missa de Natal">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">24 de Dezembro, 2023 - 22h</div>
-                        <h3 class="event-title">Missa do Galo</h3>
-                        <p>Celebre conosco a Missa do Galo, uma tradição especial da véspera de Natal.</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -734,11 +1279,15 @@
                 </div>
             </div>
             
+            <!-- Mapa Incorporado do Google Maps -->
             <div class="map-container">
-                <!-- Mapa placeholder - em um site real, você usaria uma API como Google Maps -->
-                <div style="width:100%;height:100%;background-color:#eee;display:flex;align-items:center;justify-content:center;">
-                    <p>Mapa da Localização da Igreja</p>
-                </div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.76649491471332!2d-35.63921635103107!3d-6.488226505035035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7adedf1189929e3%3A0xae52694b7508778e!2sPra%C3%A7a%20Jo%C3%A3o%20Ferreira%20da%20Silva%2C%20317%20-%20CENTRO%2C%20Tacima%20-%20PB%2C%2058240-000%2C%20Brazil!5e0!3m2!1sen!2sus!4v1763744462822!5m2!1sen!2sus" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>
@@ -760,9 +1309,9 @@
                 <div class="footer-section">
                     <h3>Siga-nos</h3>
                     <div class="social-links">
-                        <a href="#"></a>
-                        <a href="#"></a>
-                        <a href="#"></a>
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
                     </div>
                 </div>
             </div>
@@ -813,6 +1362,37 @@
             }
         });
 
+        // Filtro de notícias
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Aqui você pode adicionar a lógica para filtrar as notícias
+            });
+        });
+
+        // Sistema para destacar o culto do dia atual
+        function highlightTodayService() {
+            const days = [
+                'domingo', 'segunda', 'terca', 'quarta', 
+                'quinta', 'sexta', 'sabado'
+            ];
+            
+            const today = new Date().getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+            const todayCard = document.getElementById(`${days[today]}-card`);
+            
+            if (todayCard) {
+                todayCard.classList.add('today-highlight');
+                
+                // Adicionar badge "Hoje"
+                const badge = document.createElement('div');
+                badge.className = 'today-badge';
+                badge.textContent = 'HOJE';
+                todayCard.appendChild(badge);
+            }
+        }
+
         // Simulação de status em tempo real
         function updateChurchStatus() {
             const now = new Date();
@@ -824,17 +1404,37 @@
             const indicator = document.querySelector('.status-indicator');
             const dot = document.querySelector('.status-dot');
             
-            // Horários de funcionamento
+            // Horários de funcionamento baseados nos cultos
             let isOpen = false;
+            let currentService = '';
             
-            // Verificar se está dentro do horário de culto
-            if ((day >= 0 && day <= 6) && (hour >= 19 && hour < 21)) {
+            // Verificar se está dentro do horário de algum culto
+            if (day === 0 && hour >= 19 && hour < 21) { // Domingo
                 isOpen = true;
+                currentService = 'Culto de Celebração';
+            } else if (day === 1 && hour >= 19 && hour < 20.5) { // Segunda
+                isOpen = true;
+                currentService = 'Culto de Ensino';
+            } else if (day === 2 && hour >= 19 && hour < 21) { // Terça
+                isOpen = true;
+                currentService = 'Culto da Família';
+            } else if (day === 3 && hour >= 19 && hour < 21) { // Quarta
+                isOpen = true;
+                currentService = 'Culto de Oração';
+            } else if (day === 4 && hour >= 19 && hour < 20.5) { // Quinta
+                isOpen = true;
+                currentService = 'Ensaio do Coral';
+            } else if (day === 5 && hour >= 19 && hour < 21) { // Sexta
+                isOpen = true;
+                currentService = 'Culto de Jovens';
+            } else if (day === 6 && hour >= 15 && hour < 17) { // Sábado
+                isOpen = true;
+                currentService = 'Visitação';
             }
             
             // Atualizar a interface
             if (isOpen) {
-                statusElement.textContent = 'Aberto Agora';
+                statusElement.textContent = `Aberto - ${currentService}`;
                 indicator.className = 'status-indicator status-open';
                 dot.className = 'status-dot open-dot';
             } else {
@@ -843,12 +1443,15 @@
                 dot.className = 'status-dot closed-dot';
             }
         }
-        
-        // Atualizar o status quando a página carregar
-        document.addEventListener('DOMContentLoaded', updateChurchStatus);
-        
-        // Atualizar o status a cada minuto
-        setInterval(updateChurchStatus, 60000);
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateChurchStatus();
+            highlightTodayService();
+            
+            // Atualizar o status a cada minuto
+            setInterval(updateChurchStatus, 60000);
+        });
     </script>
 </body>
 </html>

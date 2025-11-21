@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igreja - ADPT</title>
-    
-    <!-- Google Maps API -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_API&callback=initMap">
-    </script>
-    
+    <link rel="shortcut icon" href="src/img/logoassembleiadeus.jpg" type="image/x-icon">
     <style>
         /* Reset e estilos básicos */
         * {
@@ -28,6 +22,10 @@
             --dark-color: #333;
             --success-color: #28a745;
             --danger-color: #dc3545;
+            --news-bg: #ffffff;
+            --news-border: #e0e0e0;
+            --news-date: #666;
+            --news-title: #1a4b8c;
         }
         
         body {
@@ -50,7 +48,7 @@
         
         /* Header Transparente */
         header {
-            background-color: rgba(26, 75, 140, 0.148); /* 80% transparente */
+            background-color: rgba(26, 75, 140, 0.148);
             color: white;
             padding: 1rem 0;
             position: fixed;
@@ -58,11 +56,11 @@
             top: 0;
             z-index: 1000;
             transition: background-color 0.3s ease;
-            backdrop-filter: blur(30px); /* Efeito de vidro fosco */
+            backdrop-filter: blur(30px);
         }
         
         header.scrolled {
-            background-color: rgba(26, 75, 140, 0.95); /* Mais opaco quando scroll */
+            background-color: rgba(26, 75, 140, 0.95);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
@@ -80,10 +78,6 @@
         .logo h1 {
             font-size: 1.5rem;
             margin-left: 10px;
-        }
-        
-        .logo-icon {
-            font-size: 2rem;
         }
         
         /* Menu Desktop */
@@ -130,12 +124,12 @@
             transition: all 0.3s ease;
         }
         
-        /* Menu Mobile Lateral - 80% da tela */
+        /* Menu Mobile Lateral */
         .mobile-nav {
             position: fixed;
             top: 0;
-            right: -100%; /* Começa fora da tela */
-            width: 80%; /* Ocupa 80% da largura */
+            right: -100%;
+            width: 80%;
             height: 100vh;
             background-color: rgba(26, 75, 140, 0.95);
             box-shadow: -5px 0 15px rgba(0,0,0,0.1);
@@ -219,7 +213,7 @@
             display: block;
         }
         
-        /* Hero Section Expandida */
+        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0, 0, 0, 0.802)), 
                         url('src/img/Igrejaadpb.jpg') 
@@ -375,65 +369,227 @@
         .about-image:hover img {
             transform: scale(1.05);
         }
-        
-        /* Events Section */
-        .events-section {
+
+        /* News/Events Section - Estilo Prefeitura */
+        .news-section {
             padding: 5rem 0;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
-        
-        .events-grid {
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .news-header h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .news-filter {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
         }
-        
-        .event-card {
-            background: white;
-            border-radius: 15px;
+
+        .main-news {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .featured-news {
+            background: var(--news-bg);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        
-        .event-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+
+        .featured-news:hover {
+            transform: translateY(-5px);
         }
-        
-        .event-image {
-            height: 220px;
+
+        .featured-image {
+            height: 300px;
             overflow: hidden;
         }
-        
-        .event-image img {
+
+        .featured-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
-        
-        .event-card:hover .event-image img {
-            transform: scale(1.1);
+
+        .featured-news:hover .featured-image img {
+            transform: scale(1.05);
         }
-        
-        .event-content {
+
+        .featured-content {
             padding: 2rem;
         }
-        
-        .event-date {
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
+
+        .news-date {
+            color: var(--news-date);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .event-title {
-            font-size: 1.4rem;
+
+        .news-date::before {
+            content: '📅';
+        }
+
+        .featured-content h3 {
+            color: var(--news-title);
+            font-size: 1.5rem;
             margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .featured-content p {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        .secondary-news {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .news-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: var(--news-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .sidebar-card h4 {
+            color: var(--news-title);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .news-list {
+            list-style: none;
+        }
+
+        .news-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--news-border);
+        }
+
+        .news-list li:last-child {
+            border-bottom: none;
+        }
+
+        .news-list a {
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .news-list a:hover {
             color: var(--primary-color);
         }
-        
+
+        .news-list .date {
+            color: var(--news-date);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .news-item {
+            background: var(--news-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .news-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .news-item h4 {
+            color: var(--news-title);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .news-item p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--news-date);
+        }
+
         /* Contact Section */
         .contact-section {
             padding: 5rem 0;
@@ -468,11 +624,20 @@
             margin-right: 1.5rem;
         }
         
+        /* Estilos para o Mapa Incorporado */
         .map-container {
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             height: 400px;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
         
         /* Footer */
@@ -560,11 +725,38 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .secondary-news {
+                grid-template-columns: 1fr;
+            }
+
+            .news-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .news-filter {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         @media (max-width: 480px) {
             .mobile-nav {
-                width: 85%; /* Um pouco mais em telas muito pequenas */
+                width: 85%;
             }
             
             .logo h1 {
@@ -583,6 +775,22 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 1rem;
             }
+            
+            .map-container {
+                height: 250px;
+            }
+
+            .featured-image {
+                height: 200px;
+            }
+
+            .featured-content {
+                padding: 1.5rem;
+            }
+
+            .featured-content h3 {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -599,8 +807,9 @@
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="#home">Início</a></li>
+                    <li><a href="#news">Notícias</a></li>
+                    <li><a href="#services">Cultos</a></li>
                     <li><a href="#about">Sobre</a></li>
-                    <li><a href="#events">Eventos</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
@@ -628,7 +837,7 @@
         <ul>
             <li><a href="#home">Início</a></li>
             <li><a href="#about">Sobre</a></li>
-            <li><a href="#events">Eventos</a></li>
+            <li><a href="#news">Notícias</a></li>
             <li><a href="#contact">Contato</a></li>
         </ul>
     </nav>
@@ -638,7 +847,7 @@
         <div class="container hero-content">
             <h2>Bem-vindo à Igreja Assembleia de Deus em Tacima-PB</h2>
             <p>Uma comunidade de fé, esperança e amor. Junte-se a nós em nossas celebrações e atividades.</p>
-            <a href="#events" class="btn">Ver Próximos Eventos</a>
+            <a href="#news" class="btn">Ver Últimas Notícias</a>
             
             <!-- Status na Hero Section -->
             <div class="hero-status">
@@ -650,7 +859,182 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- News Section - Estilo Prefeitura -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <div class="news-header">
+                <h2>Notícias e Eventos</h2>
+                <div class="news-filter">
+                    <button class="filter-btn active">Todos</button>
+                    <button class="filter-btn">Eventos</button>
+                    <button class="filter-btn">Notícias</button>
+                    <button class="filter-btn">Cultos</button>
+                </div>
+            </div>
+
+            <div class="news-grid">
+                <div class="main-news">
+                    <!-- Notícia em Destaque -->
+                    <div class="featured-news">
+                        <div class="featured-image">
+                            <img src="src/img/logoenem.jpg" alt="ENEM Bíblico">
+                        </div>
+                        <div class="featured-content">
+                            <div class="news-date">04 de Janeiro de 2025</div>
+                            <h3>ENEM Bíblico 2025 - Inscrições Abertas</h3>
+                            <p>Participe do nosso ENEM Bíblico na Assembleia de Deus em Tacima-PB. Uma oportunidade única para testar seus conhecimentos bíblicos e aprender mais sobre a palavra de Deus. Evento gratuito e aberto a toda comunidade.</p>
+                            <div class="news-meta">
+                            <a href="#" class="read-more">
+                                Ler mais 
+                                <span>→</span>
+                            </a>
+                            <span>Evento</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notícias Secundárias -->
+                    <div class="secondary-news">
+                            <div class="news-item">
+                                <h4>Aquisição de Ar-Condicionados - 2025</h4>
+                                <p>Estamos realizando a campanha para aquisição de novos ar-condicionados para melhorar o conforto térmico do nosso templo. Sua contribuição é fundamental para proporcionar um ambiente mais agradável durante nossos cultos e atividades.</p>
+                                <div class="news-meta">
+                                <a href="#" class="read-more">
+                                Ler mais 
+                                <span>→</span>
+                                </a>
+                                    <span>Campanha</span>
+                                </div>
+                            </div> 
+
+                            <div class="news-item">
+                                <h4>Campanha do Carro Missionário - 2025</h4>
+                                <p>Junte-se a nós nesta campanha para adquirir um carro que será uma ferramenta poderosa na obra de Deus! O veículo será usado para: visitas pastorais, evangelismo, transporte de irmãos para cultos e auxílio em ações sociais. Cada contribuição nos aproxima deste objetivo!</p>
+                                <div class="news-meta">
+                                 <a href="#" class="read-more">
+                                Ler mais 
+                                <span>→</span>
+                                </a>
+                                    <span>Campanha</span>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="news-sidebar">
+
+                    <div class="sidebar-card">
+                        <h4>Próximos Eventos</h4>
+                        <ul class="news-list">
+                            <li>
+                                <a href="#">
+                                    <span>Culto de Ano Novo</span>
+                                    <span class="date">31/12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Ensaio do Coral</span>
+                                    <span class="date">12/12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Escola Bíblica</span>
+                                    <span class="date">Todos os domingos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Culto de Oração</span>
+                                    <span class="date">Quartas 19h</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                        <div class="sidebar-card">
+                        <h4>Cultos da Semana</h4>
+                        <ul class="news-list">
+                            <li>
+                                <a href="#">
+                                    <span>Segunda - Cículo de Oração</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Terça - Fechado</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Quarta - Escola Bíblica</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <span>Quinta - Fechado</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Sexta - Doutrina</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="#">
+                                    <span>Sábado - Ensaios</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="#">
+                                    <span>Domingo - Missões</span>
+                                    <span class="time">19:00</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Notícias Recentes</h4>
+                        <ul class="news-list">
+                            <li>
+                                <a href="#">
+                                    <span>ENEM Bíblico - Inscrições Abertas</span>
+                                    <span class="date">04/01/26</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Campanha do Carro Missionário</span>
+                                    <span class="date">31/12/25</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Aquisição de Ar-Condicionados</span>
+                                    <span class="date">15/04/25</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- About Section -->
     <section class="about-section" id="about">
         <div class="container">
             <h2 class="section-title">Sobre Nossa Igreja</h2>
@@ -663,47 +1047,6 @@
                 </div>
                 <div class="about-image">
                     <img src="src/img/Oficial igreja .jpg" alt="Interior da Igreja">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events Section -->
-    <section class="events-section" id="events">
-        <div class="container">
-            <h2 class="section-title">Próximos Eventos</h2>
-            <div class="events-grid">
-                <div class="event-card">
-                    <div class="event-image">
-                        <img src="src/img/logoenem.jpg" alt="Coral de Natal">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">04 de Janeiro, 2025 - 13h às 17h30</div>
-                        <h3 class="event-title">ENEM - Bíblico</h3>
-                        <p>Participe do nosso ENEM Bíblico na assembleia de Deus em Tacima-PB. Aberto a todos os interessados.</p>
-                    </div>
-                </div>
-                
-                <div class="event-card">
-                    <div class="event-image">
-                        <img src="https://source.unsplash.com/random/600x400/?charity" alt="Campanha do Agasalho">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">20 de Dezembro, 2023 - 14h</div>
-                        <h3 class="event-title">Campanha do Agasalho</h3>
-                        <p>Doe agasalhos e cobertores para famílias necessitadas durante o inverno.</p>
-                    </div>
-                </div>
-                
-                <div class="event-card">
-                    <div class="event-image">
-                        <img src="https://source.unsplash.com/random/600x400/?celebration" alt="Missa de Natal">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">24 de Dezembro, 2023 - 22h</div>
-                        <h3 class="event-title">Missa do Galo</h3>
-                        <p>Celebre conosco a Missa do Galo, uma tradição especial da véspera de Natal.</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -739,9 +1082,15 @@
                 </div>
             </div>
             
+            <!-- Mapa Incorporado do Google Maps -->
             <div class="map-container">
-                <!-- Mapa do Google Maps -->
-                <div id="map" style="width:100%;height:100%;"></div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.76649491471332!2d-35.63921635103107!3d-6.488226505035035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7adedf1189929e3%3A0xae52694b7508778e!2sPra%C3%A7a%20Jo%C3%A3o%20Ferreira%20da%20Silva%2C%20317%20-%20CENTRO%2C%20Tacima%20-%20PB%2C%2058240-000%2C%20Brazil!5e0!3m2!1sen!2sus!4v1763744462822!5m2!1sen!2sus" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>
@@ -763,9 +1112,9 @@
                 <div class="footer-section">
                     <h3>Siga-nos</h3>
                     <div class="social-links">
-                        <a href="#"></a>
-                        <a href="#"></a>
-                        <a href="#"></a>
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
                     </div>
                 </div>
             </div>
@@ -816,6 +1165,16 @@
             }
         });
 
+        // Filtro de notícias
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Aqui você pode adicionar a lógica para filtrar as notícias
+            });
+        });
+
         // Simulação de status em tempo real
         function updateChurchStatus() {
             const now = new Date();
@@ -845,112 +1204,6 @@
                 indicator.className = 'status-indicator status-closed';
                 dot.className = 'status-dot closed-dot';
             }
-        }
-        
-        // Google Maps Integration
-        function initMap() {
-            // Coordenadas da Igreja Assembleia de Deus em Tacima-PB
-            const churchLocation = { lat: -6.4883, lng: -35.6369 }; // Coordenadas aproximadas de Tacima-PB
-            
-            // Criar o mapa
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: churchLocation,
-                styles: [
-                    {
-                        "featureType": "all",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f5f5f5" }]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{ "gamma": 0.01 }, { "lightness": 20 }]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [{ "saturation": -31 }, { "lightness": -33 }, { "weight": 2 }, { "gamma": 0.8 }]
-                    },
-                    {
-                        "featureType": "all",
-                        "elementType": "labels.icon",
-                        "stylers": [{ "visibility": "off" }]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#a7a7a7" }]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#e3e3e3" }]
-                    },
-                    {
-                        "featureType": "poi",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#f5f5f5" }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "color": "#ffffff" }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry.stroke",
-                        "stylers": [{ "color": "#b3b3b3" }]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#ffffff" }]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#ffffff" }]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "geometry",
-                        "stylers": [{ "color": "#a0d0ff" }]
-                    }
-                ]
-            });
-            
-            // Criar o marcador
-            const marker = new google.maps.Marker({
-                position: churchLocation,
-                map: map,
-                title: "Igreja Assembleia de Deus em Tacima-PB",
-                icon: {
-                    url: "data:image/svg+xml;base64," + btoa(`
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="20" r="18" fill="#1a4b8c" stroke="white" stroke-width="2"/>
-                            <path d="M20 10L25 15H15L20 10Z" fill="white"/>
-                            <rect x="15" y="15" width="10" height="10" fill="white"/>
-                            <rect x="17" y="25" width="6" height="8" fill="white"/>
-                        </svg>
-                    `),
-                    scaledSize: new google.maps.Size(40, 40)
-                }
-            });
-            
-            // Info Window
-            const infoWindow = new google.maps.InfoWindow({
-                content: `
-                    <div style="padding: 10px;">
-                        <h3 style="margin: 0 0 5px 0; color: #1a4b8c;">Igreja Assembleia de Deus</h3>
-                        <p style="margin: 0; font-size: 14px;">Praça João Ferreira da Silva, 317<br>Centro, Tacima - PB</p>
-                    </div>
-                `
-            });
-            
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
         }
         
         // Atualizar o status quando a página carregar
