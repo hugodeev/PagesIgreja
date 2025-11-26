@@ -394,83 +394,90 @@
             transform: scale(1.05);
         }
 
-        /* Services Section - Cultos da Semana em Lista */
+        /* Services Section - Cultos da Semana em Cards */
         .services-section {
             padding: 5rem 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
         .services-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .services-list {
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .service-card {
             background: var(--news-bg);
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
             overflow: hidden;
         }
 
-        .service-day {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--news-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
-        .service-day:last-child {
-            border-bottom: none;
-        }
-
-        .service-day:hover {
-            background-color: var(--light-color);
-        }
-
-        .service-day.today {
+        .service-card.today {
             background: linear-gradient(135deg, var(--primary-color), #2c5fa3);
             color: white;
+            border-color: var(--secondary-color);
         }
 
-        .service-day.today .service-info,
-        .service-day.today .service-time {
+        .service-card.today .service-day-name,
+        .service-card.today .service-description,
+        .service-card.today .service-time {
             color: white;
         }
 
-        .service-day.today .service-badge {
+        .service-card.today .service-badge {
             background: var(--secondary-color);
             color: var(--dark-color);
         }
 
         .service-info {
-            flex: 1;
+            margin-bottom: 1rem;
         }
 
         .service-day-name {
             font-size: 1.3rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.3rem;
-        }
-
-        .service-day.today .service-day-name {
-            color: white;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .service-description {
             color: var(--news-date);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
         }
 
         .service-time {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.5rem;
             font-weight: 500;
             color: var(--primary-color);
-            margin-left: 2rem;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
 
         .service-badge {
@@ -480,16 +487,19 @@
             border-radius: 15px;
             font-size: 0.8rem;
             font-weight: 600;
-            margin-left: 1rem;
+            display: inline-block;
+            margin-top: 0.5rem;
         }
 
-        /* Novos estilos para os status dos cultos */
         .cult-status {
             font-weight: bold;
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.8rem;
-            margin-left: 1rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2;
         }
 
         .status-cultuado {
@@ -509,6 +519,179 @@
             color: #ffc107;
             border: 1px solid #ffc107;
             animation: pulse 2s infinite;
+        }
+
+        /* Ícones para cada dia */
+        .service-day-name::before {
+            font-size: 1.2rem;
+        }
+
+        #segunda .service-day-name::before { content: '📖'; }
+        #terca .service-day-name::before { content: '⏸️'; }
+        #quarta .service-day-name::before { content: '📚'; }
+        #quinta .service-day-name::before { content: '⏸️'; }
+        #sexta .service-day-name::before { content: '✝️'; }
+        #sabado .service-day-name::before { content: '🎵'; }
+        #domingo .service-day-name::before { content: '🎉'; }
+
+        /* ENEM Bíblico Section */
+        .enem-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5fa3 100%);
+            color: white;
+        }
+
+        .enem-section .section-title {
+            color: white;
+        }
+
+        .enem-section .section-subtitle {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .enem-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .enem-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: var(--dark-color);
+        }
+
+        .enem-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light-color);
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .enem-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .enem-info p {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .enem-highlight {
+            background: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .enem-form {
+            margin-top: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--news-border);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.1);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-required {
+            color: var(--danger-color);
+            margin-left: 3px;
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background: #153a6d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:disabled {
+            background: var(--news-date);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-success {
+            background: var(--success-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .form-success.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* News/Events Section - Estilo Prefeitura */
@@ -957,40 +1140,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--news-border);
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
         /* FAQ Section */
         .faq-section {
             padding: 5rem 0;
@@ -1105,101 +1254,117 @@
             display: block;
         }
         
-        /* Footer */
+        /* Footer Mobile Otimizado */
         footer {
             background-color: var(--dark-color);
             color: white;
-            padding: 3rem 0 1rem 0;
+            padding: 2rem 0 1rem 0;
         }
-        
+
         .footer-content {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
             gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-section h3 {
             margin-bottom: 1.5rem;
-            color: var(--secondary-color);
         }
-        
+
+        .footer-section {
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .social-links a {
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             transition: all 0.3s;
+            padding: 0.5rem;
         }
-        
+
         .social-links a:hover {
             color: var(--secondary-color);
             transform: translateY(-3px);
         }
 
-        /* Mapa do Site no Footer */
+        /* Mapa do Site no Footer - Mobile */
         .sitemap {
-            background: rgba(0, 0, 0, 0);
-            padding: 2rem 0;
-            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
             border-radius: 10px;
         }
 
         .sitemap-links {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
         .sitemap-column h4 {
             color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            text-align: center;
         }
 
         .sitemap-column ul {
             list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1rem;
         }
 
         .sitemap-column ul li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .sitemap-column ul li a {
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             transition: color 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
         }
 
         .sitemap-column ul li a:hover {
             color: var(--secondary-color);
-        }
-        
-        .copyright {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1.5rem;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-            text-align: center;
+            background: rgba(255,255,255,0.1);
         }
 
-        /* WhatsApp Widget */
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* WhatsApp Widget - Mobile */
         .whatsapp-widget {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             z-index: 1000;
         }
 
@@ -1207,14 +1372,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-color: #25D366;
             color: white;
             border-radius: 50%;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             text-decoration: none;
-            font-size: 2rem;
+            font-size: 1.5rem;
             transition: all 0.3s;
         }
 
@@ -1285,24 +1450,33 @@
                 justify-content: center;
             }
 
-            .service-day {
-                padding: 1.2rem 1.5rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
+            /* Services Grid Mobile */
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
             }
-
+            
+            .service-card {
+                padding: 1.2rem;
+                min-height: 160px;
+            }
+            
+            .service-day-name {
+                font-size: 1.1rem;
+            }
+            
             .service-time {
-                margin-left: 0;
+                font-size: 1rem;
             }
 
-            .service-badge {
-                margin-left: 0;
+            /* ENEM Bíblico Mobile */
+            .enem-card {
+                padding: 1.5rem;
             }
 
-            .cult-status {
-                margin-left: 0;
-                margin-top: 0.5rem;
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .newsletter-form {
@@ -1313,13 +1487,21 @@
                 grid-template-columns: 1fr;
             }
 
-            .sitemap-links {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
+            /* Footer mobile */
             .footer-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 1.5rem;
+            }
+
+            .sitemap-links {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .sitemap-column ul {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
         
@@ -1361,12 +1543,25 @@
                 font-size: 1.3rem;
             }
 
-            .service-day {
-                padding: 1rem 1.2rem;
+            /* Services Grid Mobile Pequeno */
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .service-card {
+                padding: 1rem;
+                min-height: 140px;
             }
 
-            .service-day-name {
-                font-size: 1.1rem;
+            /* ENEM Bíblico Mobile Pequeno */
+            .enem-card {
+                padding: 1rem;
+            }
+
+            .enem-info {
+                padding: 1rem;
             }
 
             .leadership-grid,
@@ -1374,8 +1569,58 @@
                 grid-template-columns: 1fr;
             }
 
-            .sitemap-links {
-                grid-template-columns: 1fr;
+            /* Footer mobile para telas muito pequenas */
+            .sitemap-column ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sitemap-column ul li {
+                margin-bottom: 0.5rem;
+            }
+
+            .social-links {
+                gap: 0.8rem;
+            }
+            
+            .social-links a {
+                font-size: 1.3rem;
+            }
+            
+            .whatsapp-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Responsividade adicional para telas muito pequenas */
+        @media (max-width: 360px) {
+            footer {
+                padding: 1.5rem 0 0.8rem 0;
+            }
+            
+            .sitemap-column ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sitemap-column ul li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .social-links {
+                gap: 0.8rem;
+            }
+            
+            .social-links a {
+                font-size: 1.3rem;
+            }
+            
+            .whatsapp-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -1395,6 +1640,7 @@
                     <li><a href="#home">Início</a></li>
                     <li><a href="#news">Notícias</a></li>
                     <li><a href="#services">Cultos</a></li>
+                    <li><a href="#enem">ENEM Bíblico</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
@@ -1423,6 +1669,7 @@
             <li><a href="#home">Início</a></li>
             <li><a href="#news">Notícias</a></li>
             <li><a href="#services">Cultos</a></li>
+            <li><a href="#enem">ENEM Bíblico</a></li>
             <li><a href="#leadership">Liderança</a></li>
             <li><a href="#gallery">Galeria</a></li>
             <li><a href="#blog">Blog</a></li>
@@ -1439,7 +1686,7 @@
             <p>Uma comunidade de fé, esperança e amor. Junte-se a nós em nossas celebrações e atividades.</p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 <a href="#services" class="btn">Ver Horários de Cultos</a>
-                <a href="#contact" class="btn btn-secondary">Visitar a Igreja</a>
+                <a href="#enem" class="btn btn-secondary">Inscrever no ENEM Bíblico</a>
             </div>
             
             <!-- Status na Hero Section -->
@@ -1477,8 +1724,8 @@
                             <h3>ENEM Bíblico 2025 - Inscrições Abertas</h3>
                             <p>Participe do nosso ENEM Bíblico na Assembleia de Deus em Tacima-PB. Uma oportunidade única para testar seus conhecimentos bíblicos e aprender mais sobre a palavra de Deus. Evento gratuito e aberto a toda comunidade.</p>
                             <div class="news-meta">
-                                <a href="#" class="read-more">
-                                    Ler mais 
+                                <a href="#enem" class="read-more">
+                                    Fazer Inscrição 
                                     <span>→</span>
                                 </a>
                                 <span>Evento</span>
@@ -1526,9 +1773,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span>Ensaio do Coral</span>
-                                    <span class="date">12/12</span>
+                                <a href="#enem">
+                                    <span>ENEM Bíblico</span>
+                                    <span class="date">Em breve</span>
                                 </a>
                             </li>
                             <li>
@@ -1550,7 +1797,7 @@
                         <h4>Notícias Recentes</h4>
                         <ul class="news-list">
                             <li>
-                                <a href="#">
+                                <a href="#enem">
                                     <span>ENEM Bíblico - Inscrições Abertas</span>
                                     <span class="date">04/01/26</span>
                                 </a>
@@ -1574,7 +1821,90 @@
         </div>
     </section>
 
-    <!-- Services Section - Cultos da Semana em Lista -->
+    <!-- ENEM Bíblico Section -->
+    <section class="enem-section" id="enem">
+        <div class="container">
+            <h2 class="section-title">ENEM Bíblico 2025</h2>
+            <p class="section-subtitle">
+                Teste seus conhecimentos bíblicos e aprofunde sua fé! Inscrições gratuitas e abertas a toda comunidade.
+            </p>
+            
+            <div class="enem-container">
+                <div class="enem-card">
+                    <div class="enem-info">
+                        <h3>📚 Sobre o ENEM Bíblico</h3>
+                        <p><strong>Data:</strong> A ser definida</p>
+                        <p><strong>Local:</strong> Igreja Assembleia de Deus - Tacima/PB</p>
+                        <p><strong>Horário:</strong> A partir das 18h</p>
+                        <div class="enem-highlight">🎯 Evento 100% Gratuito</div>
+                        <p>Venha testar seus conhecimentos bíblicos em uma noite especial de aprendizado e comunhão!</p>
+                    </div>
+
+                    <div class="enem-form">
+                        <h3 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem;">📝 Formulário de Inscrição</h3>
+                        
+                        <form id="enemForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nomeCompleto">Nome Completo <span class="form-required">*</span></label>
+                                    <input type="text" id="nomeCompleto" name="nomeCompleto" required placeholder="Digite seu nome completo">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="telefone">Telefone/WhatsApp <span class="form-required">*</span></label>
+                                    <input type="tel" id="telefone" name="telefone" required placeholder="(83) 99999-9999">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="denominacao">Denominação Religiosa</label>
+                                    <select id="denominacao" name="denominacao">
+                                        <option value="">Selecione sua denominação</option>
+                                        <option value="Assembleia de Deus">Assembleia de Deus</option>
+                                        <option value="Batista">Batista</option>
+                                        <option value="Presbiteriana">Presbiteriana</option>
+                                        <option value="Metodista">Metodista</option>
+                                        <option value="Católica">Católica</option>
+                                        <option value="Outra">Outra denominação</option>
+                                        <option value="Nenhuma">Não tenho denominação</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="idade">Idade</label>
+                                    <input type="number" id="idade" name="idade" min="12" max="100" placeholder="Sua idade">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endereco">Endereço Completo</label>
+                                <textarea id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="observacoes">Observações (opcional)</label>
+                                <textarea id="observacoes" name="observacoes" placeholder="Alguma informação adicional que deseja compartilhar..."></textarea>
+                            </div>
+
+                            <div class="form-submit">
+                                <button type="submit" class="submit-btn" id="submitBtn">
+                                    🎓 Realizar Inscrição
+                                </button>
+                            </div>
+
+                            <div class="form-success" id="successMessage">
+                                <h4>✅ Inscrição Realizada com Sucesso!</h4>
+                                <p>Obrigado por se inscrever no ENEM Bíblico 2025. Em breve entraremos em contato com mais informações.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - Cultos da Semana em Cards -->
     <section class="services-section" id="services">
         <div class="container">
             <h2 class="section-title">Horários de Cultos</h2>
@@ -1583,76 +1913,75 @@
             </p>
             
             <div class="services-container">
-                <div class="services-list">
-
+                <div class="services-grid">
                     <!-- Segunda-feira -->
-                    <div class="service-day" id="segunda">
+                    <div class="service-card" id="segunda">
                         <div class="service-info">
                             <div class="service-day-name">Segunda-feira</div>
                             <div class="service-description">Círculo de Oração</div>
+                            <div class="service-time">19:00 - 21:00</div>
                         </div>
-                        <div class="service-time">19:00 - 21:00</div>
                         <div class="cult-status" id="status-segunda"></div>
                     </div>
 
                     <!-- Terça-feira -->
-                    <div class="service-day" id="terca">
+                    <div class="service-card" id="terca">
                         <div class="service-info">
                             <div class="service-day-name">Terça-feira</div>
                             <div class="service-description">Fechado</div>
+                            <div class="service-time">-----</div>
                         </div>
-                        <div class="service-time">-----</div>
                         <div class="cult-status" id="status-terca"></div>
                     </div>
 
                     <!-- Quarta-feira -->
-                    <div class="service-day" id="quarta">
+                    <div class="service-card" id="quarta">
                         <div class="service-info">
                             <div class="service-day-name">Quarta-feira</div>
                             <div class="service-description">Escola Bíblica e Estudo</div>
+                            <div class="service-time">19:00 - 21:00</div>
                         </div>
-                        <div class="service-time">19:00 - 21:00</div>
                         <div class="cult-status" id="status-quarta"></div>
                     </div>
 
                     <!-- Quinta-feira -->
-                    <div class="service-day" id="quinta">
+                    <div class="service-card" id="quinta">
                         <div class="service-info">
                             <div class="service-day-name">Quinta-feira</div>
                             <div class="service-description">Fechado</div>
+                            <div class="service-time">-----</div>
                         </div>
-                        <div class="service-time">-----</div>
                         <div class="cult-status" id="status-quinta"></div>
                     </div>
 
                     <!-- Sexta-feira -->
-                    <div class="service-day" id="sexta">
+                    <div class="service-card" id="sexta">
                         <div class="service-info">
                             <div class="service-day-name">Sexta-feira</div>
                             <div class="service-description">Culto de Doutrina e Ensino</div>
+                            <div class="service-time">19:00 - 21:00</div>
                         </div>
-                        <div class="service-time">19:00 - 21:00</div>
                         <div class="cult-status" id="status-sexta"></div>
                     </div>
 
                     <!-- Sábado -->
-                    <div class="service-day" id="sabado">
+                    <div class="service-card" id="sabado">
                         <div class="service-info">
                             <div class="service-day-name">Sábado</div>
                             <div class="service-description">Ensaios e Treinamentos</div>
+                            <div class="service-time">19:00 - 21:00</div>
                         </div>
-                        <div class="service-time">19:00 - 21:00</div>
                         <div class="cult-status" id="status-sabado"></div>
                     </div>
 
                     <!-- Domingo -->
-                    <div class="service-day" id="domingo">
+                    <div class="service-card" id="domingo">
                         <div class="service-info">
                             <div class="service-day-name">Domingo</div>
                             <div class="service-description">Culto de Celebração e Santa Ceia</div>
+                            <div class="service-time">19:00 - 21:00</div>
+                            <div class="service-badge">Principal</div>
                         </div>
-                        <div class="service-time">19:00 - 21:00</div>
-                        <div class="service-badge">Principal</div>
                         <div class="cult-status" id="status-domingo"></div>
                     </div>
                 </div>
@@ -2021,6 +2350,7 @@
                             <li><a href="#home">Início</a></li>
                             <li><a href="#news">Notícias</a></li>
                             <li><a href="#services">Cultos</a></li>
+                            <li><a href="#enem">ENEM Bíblico</a></li>
                             <li><a href="#leadership">Liderança</a></li>
                         </ul>
                     </div>
@@ -2300,6 +2630,89 @@
             });
         }
 
+        // Formulário ENEM Bíblico
+        const enemForm = document.getElementById('enemForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        if (enemForm) {
+            enemForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Desabilitar o botão para evitar múltiplos envios
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+                
+                // Coletar dados do formulário
+                const formData = {
+                    nomeCompleto: document.getElementById('nomeCompleto').value,
+                    telefone: document.getElementById('telefone').value,
+                    denominacao: document.getElementById('denominacao').value,
+                    idade: document.getElementById('idade').value,
+                    endereco: document.getElementById('endereco').value,
+                    observacoes: document.getElementById('observacoes').value,
+                    dataInscricao: new Date().toLocaleString('pt-BR'),
+                    timestamp: new Date().toISOString()
+                };
+
+                // URL do Google Apps Script (substitua pela sua URL)
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbwYOUR_SCRIPT_ID/exec';
+                
+                // Enviar dados para o Google Sheets
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Sucesso
+                        successMessage.classList.add('show');
+                        enemForm.reset();
+                        
+                        // Scroll para a mensagem de sucesso
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Esconder mensagem após 5 segundos
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                        }, 5000);
+                    } else {
+                        throw new Error('Erro ao enviar formulário');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao enviar inscrição. Tente novamente ou entre em contato conosco.');
+                })
+                .finally(() => {
+                    // Reabilitar o botão
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '🎓 Realizar Inscrição';
+                });
+            });
+        }
+
+        // Máscara para telefone
+        const telefoneInput = document.getElementById('telefone');
+        if (telefoneInput) {
+            telefoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.substring(0, 11);
+                
+                if (value.length > 2) {
+                    value = `(${value.substring(0,2)}) ${value.substring(2)}`;
+                }
+                if (value.length > 10) {
+                    value = `${value.substring(0,10)}-${value.substring(10)}`;
+                }
+                
+                e.target.value = value;
+            });
+        }
+
         // Smooth Scroll para âncoras
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2326,5 +2739,7 @@
         });
 
     </script>
+
+    
 </body>
 </html>
