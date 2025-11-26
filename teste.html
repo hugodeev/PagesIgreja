@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Igreja - ADPT</title>
+    <title>Igreja Assembleia de Deus em Tacima-PB | Comunidade de Fé</title>
+    <meta name="description" content="Igreja Assembleia de Deus em Tacima-PB - Uma comunidade de fé, esperança e amor. Participe de nossos cultos e atividades.">
+    <link rel="shortcut icon" href="src/img/logoassembleiadeus.jpg" type="image/x-icon">
+    
     <style>
         /* Reset e estilos básicos */
         * {
@@ -21,6 +24,7 @@
             --dark-color: #333;
             --success-color: #28a745;
             --danger-color: #dc3545;
+            --warning-color: #ffc107;
             --news-bg: #ffffff;
             --news-border: #e0e0e0;
             --news-date: #666;
@@ -265,6 +269,17 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--dark-color);
+        }
+        
         /* Status na Hero Section */
         .hero-status {
             margin-top: 2rem;
@@ -333,6 +348,16 @@
             font-size: 2.5rem;
         }
         
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--news-date);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
         .about-content {
             display: flex;
             flex-wrap: wrap;
@@ -369,141 +394,120 @@
             transform: scale(1.05);
         }
 
-        /* Services Section - Cultos da Semana */
+        /* Services Section - Cultos da Semana em Lista */
         .services-section {
             padding: 5rem 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .services-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .service-card {
+        .services-list {
             background: var(--news-bg);
             border-radius: 15px;
-            padding: 2rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--primary-color);
-            position: relative;
             overflow: hidden;
         }
 
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            text-align: center;
-        }
-
-        .service-title {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .service-time {
-            background: var(--light-color);
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
+        .service-day {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--news-border);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            font-weight: 500;
-            text-align: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
         }
 
-        .service-time::before {
-            content: '🕒';
-            font-size: 1.2rem;
+        .service-day:last-child {
+            border-bottom: none;
+        }
+
+        .service-day:hover {
+            background-color: var(--light-color);
+        }
+
+        .service-day.today {
+            background: linear-gradient(135deg, var(--primary-color), #2c5fa3);
+            color: white;
+        }
+
+        .service-day.today .service-info,
+        .service-day.today .service-time {
+            color: white;
+        }
+
+        .service-day.today .service-badge {
+            background: var(--secondary-color);
+            color: var(--dark-color);
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-day-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .service-day.today .service-day-name {
+            color: white;
         }
 
         .service-description {
-            color: var(--dark-color);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            text-align: center;
+            color: var(--news-date);
+            font-size: 0.95rem;
         }
 
-        .service-features {
-            list-style: none;
-            margin-top: 1.5rem;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
+        .service-time {
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            color: var(--news-date);
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-left: 2rem;
         }
 
-        .service-features li::before {
-            content: '✓';
-            color: var(--success-color);
-            font-weight: bold;
-            width: 20px;
-            height: 20px;
-            background: rgba(40, 167, 69, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .service-badge {
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
             font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
         }
 
-        .today-highlight {
-            background: linear-gradient(135deg, var(--primary-color), #2c5fa3) !important;
-            color: white;
-            position: relative;
-            transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(26, 75, 140, 0.3);
-        }
-
-        .today-highlight .service-title,
-        .today-highlight .service-description,
-        .today-highlight .service-features li {
-            color: white;
-        }
-
-        .today-highlight .service-features li::before {
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-
-        .today-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--secondary-color);
-            color: var(--dark-color);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        /* Novos estilos para os status dos cultos */
+        .cult-status {
             font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        .status-cultuado {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .status-proximo {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .status-acontecendo {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
             animation: pulse 2s infinite;
         }
 
@@ -727,6 +731,330 @@
             color: var(--news-date);
         }
 
+        /* Liderança Section */
+        .leadership-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .leader-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .leader-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .leader-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leader-info {
+            padding: 1.5rem;
+        }
+
+        .leader-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-info .position {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .leader-info p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Galeria Section */
+        .gallery-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Doações Section */
+        .donations-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5fa3 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .donations-section .section-title {
+            color: white;
+        }
+
+        .donation-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .donation-method {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .donation-method h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .pix-code {
+            background: white;
+            color: var(--dark-color);
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        .blog-content p {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--news-date);
+        }
+
+        /* Oração Section */
+        .prayer-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .prayer-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--news-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--news-border);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 5rem 0;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
         /* Contact Section */
         .contact-section {
             padding: 5rem 0;
@@ -782,7 +1110,6 @@
             background-color: var(--dark-color);
             color: white;
             padding: 3rem 0 1rem 0;
-            text-align: center;
         }
         
         .footer-content {
@@ -820,14 +1147,82 @@
             color: var(--secondary-color);
             transform: translateY(-3px);
         }
+
+        /* Mapa do Site no Footer */
+        .sitemap {
+            background: rgba(0, 0, 0, 0);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .sitemap-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .sitemap-column h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sitemap-column ul {
+            list-style: none;
+        }
+
+        .sitemap-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sitemap-column ul li a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .sitemap-column ul li a:hover {
+            color: var(--secondary-color);
+        }
         
         .copyright {
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 1.5rem;
             font-size: 0.9rem;
             margin-top: 2rem;
+            text-align: center;
         }
-        
+
+        /* WhatsApp Widget */
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .desktop-nav {
@@ -890,17 +1285,41 @@
                 justify-content: center;
             }
 
-            .services-grid {
+            .service-day {
+                padding: 1.2rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+
+            .service-time {
+                margin-left: 0;
+            }
+
+            .service-badge {
+                margin-left: 0;
+            }
+
+            .cult-status {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .donation-methods {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
 
-            .service-card {
-                padding: 1.5rem;
+            .sitemap-links {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .today-highlight {
-                transform: none;
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
         
@@ -941,6 +1360,23 @@
             .featured-content h3 {
                 font-size: 1.3rem;
             }
+
+            .service-day {
+                padding: 1rem 1.2rem;
+            }
+
+            .service-day-name {
+                font-size: 1.1rem;
+            }
+
+            .leadership-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sitemap-links {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -959,7 +1395,6 @@
                     <li><a href="#home">Início</a></li>
                     <li><a href="#news">Notícias</a></li>
                     <li><a href="#services">Cultos</a></li>
-                    <li><a href="#about">Sobre</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
@@ -988,7 +1423,11 @@
             <li><a href="#home">Início</a></li>
             <li><a href="#news">Notícias</a></li>
             <li><a href="#services">Cultos</a></li>
-            <li><a href="#about">Sobre</a></li>
+            <li><a href="#leadership">Liderança</a></li>
+            <li><a href="#gallery">Galeria</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#prayer">Oração</a></li>
+            <li><a href="#donations">Doações</a></li>
             <li><a href="#contact">Contato</a></li>
         </ul>
     </nav>
@@ -998,112 +1437,16 @@
         <div class="container hero-content">
             <h2>Bem-vindo à Igreja Assembleia de Deus em Tacima-PB</h2>
             <p>Uma comunidade de fé, esperança e amor. Junte-se a nós em nossas celebrações e atividades.</p>
-            <a href="#services" class="btn">Ver Horários de Cultos</a>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#services" class="btn">Ver Horários de Cultos</a>
+                <a href="#contact" class="btn btn-secondary">Visitar a Igreja</a>
+            </div>
             
             <!-- Status na Hero Section -->
             <div class="hero-status">
                 <div class="status-indicator status-open">
                     <span class="status-dot open-dot"></span>
                     <span id="status-text">Aberto Agora</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section - Cultos da Semana -->
-    <section class="services-section" id="services">
-        <div class="container">
-            <h2 class="section-title">Cultos da Semana</h2>
-            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: var(--dark-color); max-width: 800px; margin-left: auto; margin-right: auto;">
-                Participe dos nossos cultos durante a semana. Temos programações especiais para todas as idades e necessidades espirituais.
-            </p>
-            
-            <div class="services-grid">
-                <!-- Domingo -->
-                <div class="service-card" id="domingo-card">
-                    <div class="service-icon">🙏</div>
-                    <h3 class="service-title">Domingo</h3>
-                    <div class="service-time">19:00 - 21:00</div>
-                    <p class="service-description">Culto de Celebração e Santa Ceia. Um momento especial de adoração e comunhão com toda a família.</p>
-
-                </div>
-
-                <!-- Segunda-feira -->
-                <div class="service-card" id="segunda-card">
-                    <div class="service-icon">🌟</div>
-                    <h3 class="service-title">Segunda-feira</h3>
-                    <div class="service-time">19:00 - 20:30</div>
-                    <p class="service-description">Culto de Ensino Bíblico. Estudos profundos da Palavra de Deus para crescimento espiritual.</p>
-                    <ul class="service-features">
-                        <li>Estudo Bíblico Expositivo</li>
-                        <li>Discipulado</li>
-                        <li>Perguntas e Respostas</li>
-                    </ul>
-                </div>
-
-                <!-- Terça-feira -->
-                <div class="service-card" id="terca-card">
-                    <div class="service-icon">👨‍👩‍👧‍👦</div>
-                    <h3 class="service-title">Terça-feira</h3>
-                    <div class="service-time">19:00 - 21:00</div>
-                    <p class="service-description">Culto da Família. Momentos especiais dedicados à edificação das famílias.</p>
-                    <ul class="service-features">
-                        <li>Palestras para Casais</li>
-                        <li>Atividades para Jovens</li>
-                        <li>Programação Infantil</li>
-                    </ul>
-                </div>
-
-                <!-- Quarta-feira -->
-                <div class="service-card" id="quarta-card">
-                    <div class="service-icon">🔥</div>
-                    <h3 class="service-title">Quarta-feira</h3>
-                    <div class="service-time">19:00 - 21:00</div>
-                    <p class="service-description">Culto de Oração e Milagres. Momento poderoso de busca pela presença de Deus.</p>
-                    <ul class="service-features">
-                        <li>Oração Intercessória</li>
-                        <li>Testemunhos</li>
-                        <li>Milagres e Curas</li>
-                    </ul>
-                </div>
-
-                <!-- Quinta-feira -->
-                <div class="service-card" id="quinta-card">
-                    <div class="service-icon">🎵</div>
-                    <h3 class="service-title">Quinta-feira</h3>
-                    <div class="service-time">19:00 - 20:30</div>
-                    <p class="service-description">Ensaio do Coral e Grupos de Louvor. Preparação para os cultos de domingo.</p>
-                    <ul class="service-features">
-                        <li>Ensaio do Coral Adulto</li>
-                        <li>Prática de Instrumentos</li>
-                        <li>Escola de Música</li>
-                    </ul>
-                </div>
-
-                <!-- Sexta-feira -->
-                <div class="service-card" id="sexta-card">
-                    <div class="service-icon">🙌</div>
-                    <h3 class="service-title">Sexta-feira</h3>
-                    <div class="service-time">19:00 - 21:00</div>
-                    <p class="service-description">Culto de Jovens e Adolescentes. Programação dinâmica e relevante para a juventude.</p>
-                    <ul class="service-features">
-                        <li>Louvor Jovem</li>
-                        <li>Palestras Atuais</li>
-                        <li>Dinâmicas e Games</li>
-                    </ul>
-                </div>
-
-                <!-- Sábado -->
-                <div class="service-card" id="sabado-card">
-                    <div class="service-icon">🤝</div>
-                    <h3 class="service-title">Sábado</h3>
-                    <div class="service-time">15:00 - 17:00</div>
-                    <p class="service-description">Visitação e Evangelismo. Saímos pelas ruas para compartilhar o amor de Cristo.</p>
-                    <ul class="service-features">
-                        <li>Visitação a Enfermos</li>
-                        <li>Evangelismo de Rua</li>
-                        <li>Distribuição de Folhetos</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -1231,21 +1574,395 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section" id="about">
+    <!-- Services Section - Cultos da Semana em Lista -->
+    <section class="services-section" id="services">
         <div class="container">
-            <h2 class="section-title">Sobre Nossa Igreja</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>A Igreja Assembleia de Deus em Tacima-PB é uma comunidade cristã dedicada a servir a Deus e ao próximo. Fundada em 1970, temos uma longa história de fé e serviço em nossa comunidade.</p>
-                    <p>Nosso culto é espalhar o amor de Cristo através de ações concretas, celebrações significativas e um ambiente acolhedor para todos que nos visitam.</p>
-                    <p>Oferecemos diversos grupos de estudo bíblico, atividades para jovens e famílias, e programas de assistência social para aqueles em necessidade.</p>
-                    <a href="#contact" class="btn">Visite-nos</a>
-                </div>
-                <div class="about-image">
-                    <img src="src/img/Oficial igreja .jpg" alt="Interior da Igreja">
+            <h2 class="section-title">Horários de Cultos</h2>
+            <p class="section-subtitle">
+                Confira os horários dos nossos cultos durante a semana. Participe e fortaleça sua fé conosco!
+            </p>
+            
+            <div class="services-container">
+                <div class="services-list">
+
+                    <!-- Segunda-feira -->
+                    <div class="service-day" id="segunda">
+                        <div class="service-info">
+                            <div class="service-day-name">Segunda-feira</div>
+                            <div class="service-description">Círculo de Oração</div>
+                        </div>
+                        <div class="service-time">19:00 - 21:00</div>
+                        <div class="cult-status" id="status-segunda"></div>
+                    </div>
+
+                    <!-- Terça-feira -->
+                    <div class="service-day" id="terca">
+                        <div class="service-info">
+                            <div class="service-day-name">Terça-feira</div>
+                            <div class="service-description">Fechado</div>
+                        </div>
+                        <div class="service-time">-----</div>
+                        <div class="cult-status" id="status-terca"></div>
+                    </div>
+
+                    <!-- Quarta-feira -->
+                    <div class="service-day" id="quarta">
+                        <div class="service-info">
+                            <div class="service-day-name">Quarta-feira</div>
+                            <div class="service-description">Escola Bíblica e Estudo</div>
+                        </div>
+                        <div class="service-time">19:00 - 21:00</div>
+                        <div class="cult-status" id="status-quarta"></div>
+                    </div>
+
+                    <!-- Quinta-feira -->
+                    <div class="service-day" id="quinta">
+                        <div class="service-info">
+                            <div class="service-day-name">Quinta-feira</div>
+                            <div class="service-description">Fechado</div>
+                        </div>
+                        <div class="service-time">-----</div>
+                        <div class="cult-status" id="status-quinta"></div>
+                    </div>
+
+                    <!-- Sexta-feira -->
+                    <div class="service-day" id="sexta">
+                        <div class="service-info">
+                            <div class="service-day-name">Sexta-feira</div>
+                            <div class="service-description">Culto de Doutrina e Ensino</div>
+                        </div>
+                        <div class="service-time">19:00 - 21:00</div>
+                        <div class="cult-status" id="status-sexta"></div>
+                    </div>
+
+                    <!-- Sábado -->
+                    <div class="service-day" id="sabado">
+                        <div class="service-info">
+                            <div class="service-day-name">Sábado</div>
+                            <div class="service-description">Ensaios e Treinamentos</div>
+                        </div>
+                        <div class="service-time">19:00 - 21:00</div>
+                        <div class="cult-status" id="status-sabado"></div>
+                    </div>
+
+                    <!-- Domingo -->
+                    <div class="service-day" id="domingo">
+                        <div class="service-info">
+                            <div class="service-day-name">Domingo</div>
+                            <div class="service-description">Culto de Celebração e Santa Ceia</div>
+                        </div>
+                        <div class="service-time">19:00 - 21:00</div>
+                        <div class="service-badge">Principal</div>
+                        <div class="cult-status" id="status-domingo"></div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Liderança Section -->
+    <section class="leadership-section" id="leadership">
+        <div class="container">
+            <h2 class="section-title">Nossa Liderança</h2>
+            <p class="section-subtitle">
+                Conheça nossa equipe pastoral e de liderança, dedicada a servir a comunidade com amor e dedicação.
+            </p>
+            
+            <div class="leadership-grid">
+
+                <div class="leader-card">
+                    <div class="leader-image">
+                        <img src="src/img/pastorp.jpg" alt="Pastor Presidente">
+                    </div>
+                    <div class="leader-info">
+                        <h3>Pr. José Carlos de Lima</h3>
+                        <div class="position">Pastor Presidente</div>
+                        <p>Lidera nossa igreja há 15 anos, dedicado ao ensino da palavra e cuidado pastoral da comunidade.</p>
+                    </div>
+                </div>
+
+                <div class="leader-card">
+                    <div class="leader-image">
+                        <img src="src/img/pastorl.jpg" alt="Pastora">
+                    </div>
+                    <div class="leader-info">
+                        <h3>Pr. Eliezer Pereira França</h3>
+                        <div class="position">Pastor Local</div>
+                        <p>Lidera nossa igreja há 3 anos, dedicado ao ensino da palavra e cuidado pastoral da comunidade.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Galeria de Fotos</h2>
+            <p class="section-subtitle">
+                Momentos especiais registrados em nossos cultos, eventos e atividades da igreja.
+            </p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="src/img/culto1.jpg" alt="Culto de Domingo">
+                    <div class="gallery-overlay">
+                        <h4>Cultos da semana</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="src/img/evento1.jpg" alt="ENEM Bíblico">
+                    <div class="gallery-overlay">
+                        <h4>Semana Pentecostal</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="src/img/jovens1.jpg" alt="Retiro de Jovens">
+                    <div class="gallery-overlay">
+                        <h4>Desfile - Dia da Bíblia</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Doações Section -->
+    <section class="donations-section" id="donations">
+        <div class="container">
+            <h2 class="section-title">Contribua com Nossa Obra</h2>
+            <p class="section-subtitle" style="color: rgb(222, 220, 220);">
+                Sua contribuição é fundamental para mantermos e expandirmos a obra de Deus em nossa comunidade.
+            </p>
+            
+            <div class="donation-methods">
+                <div class="donation-method">
+                    <h3>PIX</h3>
+                    <p>Faça sua oferta via PIX de forma rápida e segura:</p>
+                    <div class="pix-code">
+                        assembleiadetacimapb@gmail.com
+                    </div>
+                    <p>Chave: Email</p>
+                </div>
+
+                <div class="donation-method">
+                    <h3>Ofertas no Culto</h3>
+                    <p>Contribua durante nossos cultos presenciais. Sua oferta será direcionada para:</p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>Manutenção do templo</li>
+                        <li>Ações sociais</li>
+                        <li>Obra missionária</li>
+                        <li>Projetos especiais</li>
+                    </ul>
+                </div>
+
+                <div class="donation-method">
+                    <h3>Carro Missionário</h3>
+                    <p>Participe da nossa campanha para aquisição de um veículo para a obra missionária:</p>
+                    <div class="pix-code">
+                        Campanha Carro Missionário
+                    </div>
+                    <p>Use este código como referência</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="btn" style="background: white; color: var(--primary-color);">Saiba Mais</a>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <h2 class="section-title">Blog e Devocionais</h2>
+            <p class="section-subtitle">
+                Mensagens, estudos bíblicos e devocionais para edificar sua fé e conhecimento da palavra de Deus.
+            </p>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="src/img/devocional1.jpg" alt="Devocional Diário">
+                    </div>
+                    <div class="blog-content">
+                        <h3>A Importância da Oração no Dia a Dia</h3>
+                        <p>Como desenvolver uma vida de oração consistente e transformadora em meio às ocupações diárias.</p>
+                        <div class="blog-meta">
+                            <span>Por Pr. João Silva</span>
+                            <span>15 Jan 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="src/img/estudo1.jpg" alt="Estudo Bíblico">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Estudo sobre o Fruto do Espírito</h3>
+                        <p>Uma análise profunda de Gálatas 5:22-23 e como desenvolver cada aspecto do fruto do Espírito.</p>
+                        <div class="blog-meta">
+                            <span>Por Pra. Maria Santos</span>
+                            <span>12 Jan 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="src/img/mensagem1.jpg" alt="Mensagem">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Vencendo as Tempestades da Vida</h3>
+                        <p>Encontrando esperança e força em Deus nos momentos mais difíceis da jornada cristã.</p>
+                        <div class="blog-meta">
+                            <span>Por Diácono José</span>
+                            <span>10 Jan 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn">Ver Todos os Artigos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oração Section -->
+    <section class="prayer-section" id="prayer">
+        <div class="container">
+            <h2 class="section-title">Pedidos de Oração</h2>
+            <p class="section-subtitle">
+                Compartilhe seu pedido de oração conosco. Nossa equipe pastoral irá interceder por você.
+            </p>
+            
+            <div class="prayer-form">
+                <form id="prayerRequestForm">
+                    <div class="form-group">
+                        <label for="name">Seu Nome (opcional)</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Seu Email (opcional)</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="prayerType">Tipo de Pedido</label>
+                        <select id="prayerType" name="prayerType">
+                            <option value="">Selecione uma opção</option>
+                            <option value="saude">Saúde</option>
+                            <option value="familia">Família</option>
+                            <option value="emprego">Emprego</option>
+                            <option value="conversao">Conversão</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Seu Pedido de Oração *</label>
+                        <textarea id="message" name="message" placeholder="Compartilhe seu pedido de oração..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="anonymous" value="1">
+                            Manter pedido anônimo
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Pedido de Oração</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <p class="section-subtitle">
+                Encontre respostas para as dúvidas mais comuns sobre nossa igreja e atividades.
+            </p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como posso me tornar membro da igreja?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para se tornar membro, participe de nossa classe de discipulado, que acontece mensualmente. Após a conclusão, você poderá fazer sua profissão de fé e ser batizado nas águas, tornando-se oficialmente membro da nossa comunidade.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quais são os horários dos cultos?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nossos cultos regulares acontecem de segunda a sábado às 19h, e aos domingos também às 19h. A Escola Bíblica Dominical acontece aos domingos às 9h. Consulte a seção "Cultos" para horários específicos de cada atividade.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como agendar um batismo?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Entre em contato com nossa secretaria para agendar uma conversa com o pastor. Será necessário participar de uma preparação para o batismo e professar publicamente sua fé em Jesus Cristo.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>A igreja realiza casamentos?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, realizamos cerimônias de casamento. É necessário que pelo menos um dos noivos seja membro da igreja e que participem do aconselhamento pré-nupcial com nosso pastor.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como posso participar de um ministério?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Entre em contato com o líder do ministério de seu interesse ou com nossa secretaria. Todos os membros são encorajados a servir em alguma área conforme seus dons e talentos.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>A igreja oferece ajuda social?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, temos um ministério social que oferece cestas básicas, roupas e atendimento a famílias em situação de vulnerabilidade. Entre em contato conosco para mais informações.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <h2 class="section-title" style="color: rgb(222, 220, 220);">Fique por Dentro</h2>
+            <p class="section-subtitle" style="color: rgb(222, 220, 220);">
+                Receba nossas novidades, eventos e mensagens em seu email.
+            </p>
+            
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Seu melhor email" required>
+                <button type="submit" class="btn">Inscrever</button>
+            </form>
         </div>
     </section>
 
@@ -1295,23 +2012,47 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Igreja Assembleia de Deus em Tacima-PB</h3>
-                    <p>Uma comunidade de fé, esperança e amor.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Horários de Culto</h3>
-                    <p>Domingo: 19h às 21h<br>Segunda a Sexta: 19h às 21h</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Siga-nos</h3>
-                    <div class="social-links">
-                        <a href="#">📘</a>
-                        <a href="#">📷</a>
-                        <a href="#">🐦</a>
+            <!-- Mapa do Site no Footer -->
+            <div class="sitemap">
+                <div class="sitemap-links">
+                    <div class="sitemap-column">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="#home">Início</a></li>
+                            <li><a href="#news">Notícias</a></li>
+                            <li><a href="#services">Cultos</a></li>
+                            <li><a href="#leadership">Liderança</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-column">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="#gallery">Galeria</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="#prayer">Oração</a></li>
+                            <li><a href="#donations">Doações</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-column">
+                        <h4>Contato</h4>
+                        <ul>
+                            <li><a href="#contact">Localização</a></li>
+                            <li><a href="tel:+558399515631">(83) 9951-5631</a></li>
+                            <li><a href="mailto:assembleiadetacimapb@gmail.com">Email</a></li>
+                            <li><a href="#prayer">Pedir Oração</a></li>
+                            <li><a href="#newsletter">Newsletter</a></li>
+                        </ul>
+                    </div>
+                    <div class="sitemap-column">
+                        <h4>Recursos</h4>
+                        <ul>
+                            <li><a href="#">Boletins</a></li>
+                            <li><a href="#">Estudos</a></li>
+                            <li><a href="#">Downloads</a></li>
+                            <li><a href="#">Política de Privacidade</a></li>
+                            <li><a href="#">Termos de Uso</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1321,6 +2062,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Widget 8399515631 -->
+    <div class="whatsapp-widget">
+        <a href="https://wa.me/558399515631?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20a%20igreja" class="whatsapp-btn" target="_blank" title="Fale conosco no WhatsApp">
+            💬
+        </a>
+    </div>
 
     <script>
         // Menu Hamburguer
@@ -1380,17 +2128,91 @@
             ];
             
             const today = new Date().getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
-            const todayCard = document.getElementById(`${days[today]}-card`);
+            const todayElement = document.getElementById(days[today]);
             
-            if (todayCard) {
-                todayCard.classList.add('today-highlight');
-                
-                // Adicionar badge "Hoje"
-                const badge = document.createElement('div');
-                badge.className = 'today-badge';
-                badge.textContent = 'HOJE';
-                todayCard.appendChild(badge);
+            if (todayElement) {
+                todayElement.classList.add('today');
             }
+        }
+
+        // Sistema para mostrar status dos cultos (CULTUADO, PRÓXIMO, ACONTECENDO AGORA)
+        function updateCultStatus() {
+            const now = new Date();
+            const currentDay = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+            const currentHour = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const currentTime = currentHour * 60 + currentMinutes; // Converter para minutos
+            
+            // Horários dos cultos (em minutos desde o início do dia)
+            const cultTimes = {
+                1: { start: 19 * 60, end: 21 * 60 }, // Segunda: 19:00 - 21:00
+                2: null, // Terça: Fechado
+                3: { start: 19 * 60, end: 21 * 60 }, // Quarta: 19:00 - 21:00
+                4: null, // Quinta: Fechado
+                5: { start: 19 * 60, end: 21 * 60 }, // Sexta: 19:00 - 21:00
+                6: { start: 19 * 60, end: 21 * 60 }, // Sábado: 19:00 - 21:00
+                0: { start: 19 * 60, end: 21 * 60 }  // Domingo: 19:00 - 21:00
+            };
+
+            // Mapeamento dos dias da semana (começando da segunda)
+            const weekDays = [
+                { id: 'segunda', day: 1 },
+                { id: 'terca', day: 2 },
+                { id: 'quarta', day: 3 },
+                { id: 'quinta', day: 4 },
+                { id: 'sexta', day: 5 },
+                { id: 'sabado', day: 6 },
+                { id: 'domingo', day: 0 }
+            ];
+
+            // Encontrar o índice do dia atual no array (começando da segunda)
+            let currentDayIndex = -1;
+            for (let i = 0; i < weekDays.length; i++) {
+                if (weekDays[i].day === currentDay) {
+                    currentDayIndex = i;
+                    break;
+                }
+            }
+
+            // Atualizar status para cada dia começando da segunda
+            weekDays.forEach((weekDay, index) => {
+                const statusElement = document.getElementById(`status-${weekDay.id}`);
+                if (!statusElement) return;
+
+                const cultTime = cultTimes[weekDay.day];
+                
+                if (!cultTime) {
+                    // Dia sem culto
+                    statusElement.textContent = '';
+                    statusElement.className = 'cult-status';
+                    return;
+                }
+
+                if (index < currentDayIndex) {
+                    // Culto já passou (começando da segunda-feira)
+                    statusElement.textContent = 'CULTUADO';
+                    statusElement.className = 'cult-status status-cultuado';
+                } else if (index > currentDayIndex) {
+                    // Culto futuro
+                    statusElement.textContent = 'PRÓXIMO';
+                    statusElement.className = 'cult-status status-proximo';
+                } else {
+                    // Mesmo dia - verificar horário
+                    if (currentTime >= cultTime.start && currentTime <= cultTime.end) {
+                        // Culto acontecendo agora
+                        statusElement.textContent = 'ACONTECENDO AGORA';
+                        statusElement.className = 'cult-status status-acontecendo';
+                    } else if (currentTime < cultTime.start) {
+                        // Culto ainda vai acontecer hoje
+                        statusElement.textContent = 'PRÓXIMO';
+                        statusElement.className = 'cult-status status-proximo';
+                    } else {
+                        // Culto já passou hoje
+                        statusElement.textContent = 'CULTUADO';
+                        statusElement.className = 'cult-status status-cultuado';
+                    }
+                }
+            });
         }
 
         // Simulação de status em tempo real
@@ -1412,24 +2234,18 @@
             if (day === 0 && hour >= 19 && hour < 21) { // Domingo
                 isOpen = true;
                 currentService = 'Culto de Celebração';
-            } else if (day === 1 && hour >= 19 && hour < 20.5) { // Segunda
+            } else if (day === 1 && hour >= 19 && hour < 21) { // Segunda
                 isOpen = true;
-                currentService = 'Culto de Ensino';
-            } else if (day === 2 && hour >= 19 && hour < 21) { // Terça
-                isOpen = true;
-                currentService = 'Culto da Família';
+                currentService = 'Círculo de Oração';
             } else if (day === 3 && hour >= 19 && hour < 21) { // Quarta
                 isOpen = true;
-                currentService = 'Culto de Oração';
-            } else if (day === 4 && hour >= 19 && hour < 20.5) { // Quinta
-                isOpen = true;
-                currentService = 'Ensaio do Coral';
+                currentService = 'Escola Bíblica';
             } else if (day === 5 && hour >= 19 && hour < 21) { // Sexta
                 isOpen = true;
-                currentService = 'Culto de Jovens';
-            } else if (day === 6 && hour >= 15 && hour < 17) { // Sábado
+                currentService = 'Culto de Doutrina';
+            } else if (day === 6 && hour >= 19 && hour < 21) { // Sábado
                 isOpen = true;
-                currentService = 'Visitação';
+                currentService = 'Ensaios';
             }
             
             // Atualizar a interface
@@ -1444,14 +2260,71 @@
             }
         }
 
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Fechar todas as respostas
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('active');
+                });
+                
+                // Abrir a resposta clicada se não estava ativa
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Formulário de Pedido de Oração
+        const prayerForm = document.getElementById('prayerRequestForm');
+        if (prayerForm) {
+            prayerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Seu pedido de oração foi enviado com sucesso! Nossa equipe irá interceder por você.');
+                this.reset();
+            });
+        }
+
+        // Formulário de Newsletter
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+                alert(`Obrigado por se inscrever! Em breve você receberá nossas novidades no email: ${email}`);
+                this.reset();
+            });
+        }
+
+        // Smooth Scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
         // Inicializar quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
             updateChurchStatus();
             highlightTodayService();
+            updateCultStatus();
             
             // Atualizar o status a cada minuto
             setInterval(updateChurchStatus, 60000);
+            setInterval(updateCultStatus, 60000);
         });
+
     </script>
 </body>
 </html>
