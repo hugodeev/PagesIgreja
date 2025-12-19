@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campanha do Carro Missionário - 2025 | Assembleia de Deus Tacima-PB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #1a4b8c;
+            --secondary-color: #f8c300;
+            --accent-color: #28a745;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --text-color: #444;
+            --border-color: #e0e0e0;
+            --progress-color: #28a745;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .back-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #153a6e;
+        }
+        
+        .campaign-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .campaign-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .campaign-category {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .campaign-title {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .campaign-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .campaign-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        
+        .campaign-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Banner da Campanha */
+        .campaign-banner {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--primary-color), #2c5fa3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+            position: relative;
+        }
+        
+        .campaign-banner-content {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .campaign-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .campaign-banner p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        /* Meta de Arrecadação */
+        .fundraising-goal {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .goal-header h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .goal-amount {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .progress-container {
+            background-color: #e9ecef;
+            border-radius: 10px;
+            height: 25px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent-color), #20c997);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .progress-percentage {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .goal-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Usos do Carro */
+        .car-uses {
+            margin: 50px 0;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .uses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .use-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .use-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .use-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .use-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Métodos de Doação */
+        .donation-methods {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .donation-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .donation-card.featured {
+            border-top-color: var(--accent-color);
+            transform: scale(1.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .donation-card.featured::before {
+            content: 'RECOMENDADO';
+            position: absolute;
+            top: 10px;
+            right: -35px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .donation-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .donation-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .pix-code {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 20px 0;
+            word-break: break-all;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            border: 2px dashed #adb5bd;
+        }
+        
+        .copy-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #153a6e;
+        }
+        
+        .copy-btn.copied {
+            background-color: var(--accent-color);
+        }
+        
+        /* Benefícios da Campanha */
+        .benefits {
+            margin: 50px 0;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .benefits-list li {
+            padding: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+        
+        .benefits-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(40, 167, 69, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Testemunhos */
+        .testimonials {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h5 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Cronograma */
+        .timeline {
+            margin: 50px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 50px;
+            bottom: -40px;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        .timeline-date {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            min-width: 120px;
+            text-align: center;
+            margin-right: 30px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .timeline-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            margin: 50px 0;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            background-color: #f8f9fa;
+        }
+        
+        .faq-question:hover {
+            background-color: #e9ecef;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Rodapé da Campanha */
+        .campaign-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .campaign-verse {
+            background-color: rgba(26, 75, 140, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-style: italic;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .campaign-verse p {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .verse-ref {
+            text-align: right;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .campaign-cta {
+            margin: 30px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), #20c997);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* Contador de Doadores */
+        .donor-counter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .donor-count {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: var(--secondary-color);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .campaign-container {
+                padding: 20px;
+            }
+            
+            .campaign-title {
+                font-size: 2rem;
+            }
+            
+            .campaign-banner {
+                height: 250px;
+                font-size: 3rem;
+            }
+            
+            .campaign-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .campaign-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+            }
+            
+            .timeline-item::before {
+                left: 20px;
+                top: 70px;
+            }
+            
+            .timeline-date {
+                margin-right: 0;
+                margin-bottom: 15px;
+                align-self: flex-start;
+            }
+            
+            .donation-card.featured {
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .campaign-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .goal-amount {
+                font-size: 1rem;
+                padding: 6px 15px;
+            }
+            
+            .uses-grid,
+            .donation-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .donation-card {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <a href="#" class="back-button" onclick="window.parent.postMessage('close-news', '*')">
+        <i class="fas fa-arrow-left"></i> Voltar para Notícias
+    </a>
+
+    <div class="campaign-container">
+        <header class="campaign-header">
+            <div class="campaign-category">CAMPANHA ESPECIAL</div>
+            <h1 class="campaign-title">Campanha do Carro Missionário - 2025</h1>
+            <p class="campaign-subtitle">
+                Junte-se a nós nesta campanha para adquirir um carro que será uma ferramenta poderosa na obra de Deus!
+            </p>
+            <div class="campaign-meta">
+                <div class="campaign-meta-item">
+                    <i class="far fa-calendar"></i>
+                    <span>Início: Janeiro 2025</span>
+                </div>
+                <div class="campaign-meta-item">
+                    <i class="far fa-clock"></i>
+                    <span>Duração: 12 meses</span>
+                </div>
+                <div class="campaign-meta-item">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Meta: R$ 80.000,00</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Banner da Campanha -->
+        <div class="campaign-banner">
+            <div class="campaign-banner-content">
+                <i class="fas fa-car-alt" style="font-size: 4rem; margin-bottom: 20px;"></i>
+                <h2>Uma Ferramenta na Obra de Deus</h2>
+                <p>Cada contribuição nos aproxima deste importante objetivo!</p>
+            </div>
+        </div>
+
+        <!-- Meta de Arrecadação -->
+        <section class="fundraising-goal">
+            <div class="goal-header">
+                <h3>Meta de Arrecadação</h3>
+                <div class="goal-amount">R$ 80.000,00</div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" style="width: 35%">
+                    <span class="progress-percentage" id="progressPercentage">35%</span>
+                </div>
+            </div>
+            
+            <div class="goal-details">
+                <span>Arrecadado: <strong id="collectedAmount">R$ 28.000,00</strong></span>
+                <span>Faltam: <strong id="remainingAmount">R$ 52.000,00</strong></span>
+            </div>
+        </section>
+
+        <!-- Usos do Carro -->
+        <section class="car-uses">
+            <h2 class="section-title">Como o Carro Será Utilizado</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; color: #666;">
+                O veículo será uma ferramenta essencial para expandir o alcance do ministério e servir nossa comunidade de forma mais eficiente.
+            </p>
+            
+            <div class="uses-grid">
+                <div class="use-card">
+                    <div class="use-icon">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <h4>Visitas Pastorais</h4>
+                    <p>Visitas a irmãos enfermos, idosos e necessitados de aconselhamento espiritual.</p>
+                </div>
+                
+                <div class="use-card">
+                    <div class="use-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h4>Evangelismo</h4>
+                    <p>Levar a palavra de Deus a comunidades distantes e áreas carentes do município.</p>
+                </div>
+                
+                <div class="use-card">
+                    <div class="use-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Transporte para Cultos</h4>
+                    <p>Transportar irmãos idosos e com dificuldade de locomoção para os cultos.</p>
+                </div>
+                
+                <div class="use-card">
+                    <div class="use-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Ações Sociais</h4>
+                    <p>Distribuição de alimentos, roupas e assistência a famílias em situação de vulnerabilidade.</p>
+                </div>
+                
+                <div class="use-card">
+                    <div class="use-icon">
+                        <i class="fas fa-bible"></i>
+                    </div>
+                    <h4>Distribuição de Literatura</h4>
+                    <p>Levar Bíblias, livros cristãos e material evangelístico a diferentes comunidades.</p>
+                </div>
+                
+                <div class="use-card">
+                    <div class="use-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h4>Eventos Especiais</h4>
+                    <p>Transporte para retiros, conferências e eventos especiais da igreja.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métodos de Doação -->
+        <section class="donation-methods">
+            <h2 class="section-title">Como Contribuir</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; color: #666;">
+                Escolha a forma mais conveniente para você contribuir com esta importante obra.
+            </p>
+            
+            <div class="donation-grid">
+                <!-- PIX -->
+                <div class="donation-card featured">
+                    <div class="donation-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h4>PIX - Forma mais Rápida</h4>
+                    <p>Faça sua contribuição via PIX de forma instantânea e segura:</p>
+                    <div class="pix-code" id="pixCode">
+                        assembleiadetacimapb@gmail.com
+                    </div>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Chave: E-mail</p>
+                    <button class="copy-btn" onclick="copyPixCode()" id="copyBtn">
+                        <i class="far fa-copy"></i> Copiar Código PIX
+                    </button>
+                </div>
+                
+                <!-- Transferência Bancária -->
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h4>Transferência Bancária</h4>
+                    <p>Dados para transferência:</p>
+                    <div style="text-align: left; margin-top: 15px;">
+                        <p><strong>Banco:</strong> Banco do Brasil</p>
+                        <p><strong>Agência:</strong> 1234-5</p>
+                        <p><strong>Conta:</strong> 12.345-6</p>
+                        <p><strong>Favorecido:</strong> Assembleia de Deus em Tacima-PB</p>
+                        <p><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+                    </div>
+                </div>
+                
+                <!-- Ofertas no Culto -->
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h4>Ofertas nos Cultos</h4>
+                    <p>Contribua durante nossos cultos presenciais. Use o envelope da campanha e especifique "Carro Missionário".</p>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                        Todas as contribuições serão registradas e transparentes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefícios -->
+        <section class="benefits">
+            <h2 class="section-title">Benefícios do Projeto</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; color: #666;">
+                A aquisição do carro missionário trará inúmeros benefícios para toda a comunidade.
+            </p>
+            
+            <ul class="benefits-list">
+                <li>Ampliação do alcance evangelístico em comunidades distantes</li>
+                <li>Melhor atendimento pastoral a irmãos impossibilitados de se locomover</li>
+                <li>Otimização do tempo e recursos em visitas e ações sociais</li>
+                <li>Capacidade de resposta rápida em emergências e necessidades</li>
+                <li>Expansão do ministério de evangelismo de porta em porta</li>
+                <li>Transporte seguro para eventos e retiros espirituais</li>
+                <li>Redução de custos com transporte terceirizado</li>
+                <li>Instrumento visível do cuidado da igreja com a comunidade</li>
+            </ul>
+        </section>
+
+        <!-- Cronograma -->
+        <section class="timeline">
+            <h2 class="section-title">Cronograma da Campanha</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Jan - Mar 2025</div>
+                <div class="timeline-content">
+                    <h4>Lançamento da Campanha</h4>
+                    <p>Divulgação inicial, sensibilização da comunidade e início das arrecadações.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Abr - Jun 2025</div>
+                <div class="timeline-content">
+                    <h4>Campanha Intensiva</h4>
+                    <p>Eventos especiais, cultos de campanha e visitas para captação de recursos.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Jul - Set 2025</div>
+                <div class="timeline-content">
+                    <h4>Seleção do Veículo</h4>
+                    <p>Pesquisa de mercado, avaliação de modelos e definição das especificações.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Out - Dez 2025</div>
+                <div class="timeline-content">
+                    <h4>Aquisição e Entrega</h4>
+                    <p>Compra do veículo, adaptações necessárias e apresentação à comunidade.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testemunhos -->
+        <section class="testimonials">
+            <h2 class="section-title">O Que Dizem Nossos Líderes</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Este carro será mais que um veículo; será um instrumento de bênção para alcançar vidas que precisam conhecer o amor de Cristo. Cada contribuição é um investimento no reino de Deus."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h5>Pr. José Carlos de Lima</h5>
+                            <p>Pastor Presidente</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Como pastor local, vejo a necessidade urgente de um veículo para visitar nossos irmãos em seus lares, especialmente os mais idosos e enfermos. Este projeto trará conforto e cuidado pastoral a quem mais precisa."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EP</div>
+                        <div class="author-info">
+                            <h5>Pr. Eliezer Pereira França</h5>
+                            <p>Pastor Local</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Temos muitas comunidades carentes no entorno de Tacima que precisam ouvir a palavra de Deus. Com um carro missionário, poderemos levar esperança e auxílio a essas famílias de forma regular e eficiente."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h5>Missionária Clara Santos</h5>
+                            <p>Líder de Evangelismo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contador de Doadores -->
+        <div class="donor-counter">
+            <h3 style="margin-bottom: 10px; color: white;">Já Contribuíram</h3>
+            <div class="donor-count" id="donorCount">157</div>
+            <p>irmãos e amigos da nossa igreja</p>
+        </div>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quanto custa o carro que será adquirido?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Estamos planejando adquirir um veículo novo ou seminovo na faixa de R$ 80.000,00. O valor total inclui o veículo, documentação, seguro e adaptações necessárias para o uso missionário.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como será a transparência no uso dos recursos?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Todas as contribuições serão registradas e divulgadas mensalmente nos boletins da igreja. Após a aquisição, todas as despesas com manutenção e uso do veículo também serão transparentes.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso fazer contribuições parceladas?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Você pode contribuir com qualquer valor, uma única vez ou de forma parcelada. O importante é sua participação nesta obra. Use o envelope da campanha para contribuições parceladas.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Qual o prazo para conclusão da campanha?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A campanha está programada para durar 12 meses, de janeiro a dezembro de 2025. Se a meta for atingida antes, procederemos com a aquisição imediata do veículo.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como serei informado sobre o progresso da campanha?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Atualizações serão divulgadas semanalmente nos cultos, mensalmente no boletim da igreja e em nosso site. Também enviaremos informativos por e-mail para os contribuintes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rodapé da Campanha -->
+        <footer class="campaign-footer">
+            <div class="campaign-verse">
+                <p>"Cada um dê conforme determinou em seu coração, não com pesar ou por obrigação, pois Deus ama quem dá com alegria."</p>
+                <div class="verse-ref">2 Coríntios 9:7</div>
+            </div>
+            
+            <div class="campaign-cta">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">Faça Parte Desta Obra!</h3>
+                <p style="max-width: 800px; margin: 0 auto 30px; color: #666;">
+                    Sua contribuição, por menor que seja, fará grande diferença. Juntos, podemos adquirir esta importante ferramenta para a expansão do Reino de Deus em nossa região.
+                </p>
+                <a href="#" class="cta-button" onclick="scrollToDonation()">
+                    <i class="fas fa-hand-holding-heart"></i> Contribuir Agora
+                </a>
+            </div>
+            
+            <p style="color: #666; margin-top: 40px; font-size: 0.9rem;">
+                Para mais informações, entre em contato com nossa secretaria: (83) 9951-5631<br>
+                ou pelo e-mail: assembleiadetacimapb@gmail.com
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Função para copiar o código PIX
+        function copyPixCode() {
+            const pixCode = document.getElementById('pixCode').textContent;
+            const copyBtn = document.getElementById('copyBtn');
+            
+            navigator.clipboard.writeText(pixCode).then(() => {
+                // Feedback visual
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Código Copiado!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+                alert('Não foi possível copiar. O código é: ' + pixCode);
+            });
+        }
+        
+        // Atualizar progresso dinamicamente (simulação)
+        function updateProgress() {
+            const collected = 28000;
+            const goal = 80000;
+            const percentage = (collected / goal) * 100;
+            
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            document.getElementById('progressPercentage').textContent = `${Math.round(percentage)}%`;
+            document.getElementById('collectedAmount').textContent = `R$ ${collected.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('remainingAmount').textContent = `R$ ${(goal - collected).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            // Atualizar contador de doadores (animação)
+            const donorCount = document.getElementById('donorCount');
+            let count = parseInt(donorCount.textContent);
+            let target = 157;
+            
+            // Simular aumento gradual
+            if (count < target) {
+                const increment = Math.ceil((target - count) / 50);
+                const interval = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(interval);
+                    }
+                    donorCount.textContent = count;
+                }, 50);
+            }
+        }
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Fechar todas as respostas
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('active');
+                });
+                
+                // Abrir a resposta clicada se não estava ativa
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
+            });
+        });
+        
+        // Scroll para seção de doação
+        function scrollToDonation() {
+            const donationSection = document.querySelector('.donation-methods');
+            if (donationSection) {
+                donationSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Comunicação com página pai
+        document.querySelector('.back-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.parent.postMessage('close-news', '*');
+        });
+        
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Animação inicial dos cards
+            const cards = document.querySelectorAll('.use-card, .donation-card, .testimonial-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+        
+        // Permitir que links externos abram normalmente
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.href) {
+                e.preventDefault();
+                window.parent.postMessage({type: 'open-link', url: e.target.href}, '*');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENEM Bíblico - Inscrições</title>
+<style>
+    /* ============ ESTILOS PRINCIPAIS (MANTIDOS) ============ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    :root {
+        --primary-color: #1a4b8c;
+        --secondary-color: #f8c300;
+        --light-color: #f5f5f5;
+        --dark-color: #333;
+        --success-color: #28a745;
+        --danger-color: #dc3545;
+        --warning-color: #ffc107;
+        --step-color: #e9ecef;
+        --step-active: #1a4b8c;
+        --valid-color: #28a745;
+        --invalid-color: #dc3545;
+    }
+    
+    body {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+        line-height: 1.6;
+    }
+    
+    .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+    
+    .header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1.5rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .step-indicator {
+        display: flex;
+        justify-content: space-between;
+        margin: 2rem 0;
+        position: relative;
+    }
+    
+    .step-indicator::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background-color: var(--step-color);
+        z-index: 1;
+    }
+    
+    .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .step-number {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: var(--step-color);
+        color: var(--dark-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s;
+    }
+    
+    .step.active .step-number {
+        background-color: var(--step-active);
+        color: white;
+    }
+    
+    .step-label {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+    
+    .form-container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .form-section {
+        display: none;
+    }
+    
+    .form-section.active {
+        display: block;
+        animation: slideIn 0.4s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from { 
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to { 
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .form-title {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--light-color);
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .form-row .form-group {
+        flex: 1;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .required::after {
+        content: ' *';
+        color: var(--danger-color);
+    }
+    
+    input, select, textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.2);
+    }
+    
+    input.valid {
+        border-color: var(--valid-color);
+        background-color: rgba(40, 167, 69, 0.05);
+    }
+    
+    input.error, select.error, textarea.error {
+        border-color: var(--invalid-color);
+        background-color: rgba(220, 53, 69, 0.05);
+    }
+    
+    .error-message {
+        color: var(--danger-color);
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+        display: none;
+        animation: fadeIn 0.3s;
+    }
+    
+    .success-message {
+        color: var(--success-color);
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+        display: none;
+        animation: fadeIn 0.3s;
+    }
+    
+    .radio-group {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .radio-option input {
+        width: auto;
+    }
+    
+    .summary-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .summary-item {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .summary-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 0.25rem;
+    }
+    
+    .confirmation-section {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .confirmation-icon {
+        font-size: 4rem;
+        color: var(--success-color);
+        margin-bottom: 1rem;
+    }
+    
+    .registration-number {
+        background-color: #e9ecef;
+        padding: 1rem;
+        border-radius: 5px;
+        font-family: monospace;
+        font-size: 1.2rem;
+        margin: 1.5rem 0;
+        display: inline-block;
+    }
+    
+    /* ESTILOS PARA AS INFORMAÇÕES DA PROVA */
+    .exam-info-card {
+        background: linear-gradient(135deg, #1a4b8c, #2c6fc4);
+        color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        margin: 2rem 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        text-align: center;
+        animation: fadeIn 0.8s ease-out;
+    }
+    
+    .exam-info-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        text-align: center;
+    }
+    
+    .exam-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .exam-info-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+    }
+    
+    .exam-info-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #f8c300;
+    }
+    
+    .exam-info-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+    }
+    
+    .exam-info-value {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    
+    .exam-info-details {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-top: 0.5rem;
+    }
+    
+    .form-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+        min-height: 44px;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+        background-color: #153a6e;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+    
+    .btn-secondary:hover:not(:disabled) {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-success {
+        background-color: var(--success-color);
+        color: white;
+    }
+    
+    .btn-success:hover:not(:disabled) {
+        background-color: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        opacity: 0.7;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    .btn-loading {
+        position: relative;
+        color: transparent !important;
+    }
+    
+    .btn-loading::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        margin-left: -10px;
+        margin-top: -10px;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .progress-bar {
+        height: 5px;
+        background-color: var(--primary-color);
+        width: 0%;
+        transition: width 0.3s ease;
+        margin-bottom: 1rem;
+        border-radius: 3px;
+    }
+    
+    .field-hint {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 5px;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+        max-width: 400px;
+    }
+    
+    .notification.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .notification.success {
+        background-color: var(--success-color);
+    }
+    
+    .notification.error {
+        background-color: var(--danger-color);
+    }
+    
+    .notification.warning {
+        background-color: var(--warning-color);
+        color: var(--dark-color);
+    }
+    
+    .auto-save-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .auto-save-indicator.show {
+        opacity: 1;
+    }
+    
+    /* ============ NOVOS ESTILOS ADICIONADOS ============ */
+    .validation-icon {
+        position: absolute;
+        right: 12px;
+        top: 38px;
+        font-size: 1.2rem;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .validation-icon.valid {
+        color: var(--success-color);
+        opacity: 1;
+    }
+    
+    .validation-icon.invalid {
+        color: var(--danger-color);
+        opacity: 1;
+    }
+    
+    .age-warning {
+        display: none;
+        background-color: rgba(255, 193, 7, 0.1);
+        border: 1px solid var(--warning-color);
+        border-radius: 5px;
+        padding: 0.8rem;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--dark-color);
+        animation: fadeIn 0.3s;
+    }
+    
+    .age-warning.show {
+        display: block;
+    }
+    
+    .age-warning strong {
+        color: var(--warning-color);
+    }
+    
+    .keyboard-hint {
+        font-size: 0.75rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    
+    .keyboard-hint kbd {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 3px;
+        padding: 0.1rem 0.3rem;
+        font-size: 0.7rem;
+        font-family: monospace;
+    }
+    
+    .batch-errors {
+        background-color: rgba(220, 53, 69, 0.05);
+        border: 1px solid var(--danger-color);
+        border-radius: 5px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        display: none;
+    }
+    
+    .batch-errors.show {
+        display: block;
+        animation: fadeIn 0.3s;
+    }
+    
+    .batch-errors h4 {
+        color: var(--danger-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .batch-errors ul {
+        list-style: none;
+        padding-left: 1rem;
+    }
+    
+    .batch-errors li {
+        margin-bottom: 0.3rem;
+        color: var(--danger-color);
+    }
+    
+    .field-character-count {
+        text-align: right;
+        font-size: 0.75rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    .field-character-count.near-limit {
+        color: var(--warning-color);
+    }
+    
+    .field-character-count.over-limit {
+        color: var(--danger-color);
+        font-weight: bold;
+    }
+    
+    /* ============ ESTILOS PARA O SISTEMA DE INSCRIÇÃO CONFIRMADA ============ */
+    .btn:disabled.confirmed {
+        background-color: var(--success-color) !important;
+        color: white !important;
+        cursor: not-allowed !important;
+        opacity: 0.9 !important;
+    }
+    
+    .btn:disabled.confirmed::after {
+        content: ' ✓';
+        font-weight: bold;
+    }
+    
+    .locked-message {
+        background-color: rgba(255, 193, 7, 0.1);
+        border: 1px solid var(--warning-color);
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 1rem 0;
+        text-align: center;
+        animation: fadeIn 0.3s;
+    }
+    
+    /* ============ RESPONSIVIDADE MELHORADA ============ */
+    @media (max-width: 768px) {
+        .form-row {
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .step-label {
+            font-size: 0.75rem;
+        }
+        
+        .radio-group {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .exam-info-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .notification {
+            left: 20px;
+            right: 20px;
+            max-width: calc(100% - 40px);
+            top: 10px;
+        }
+        
+        .auto-save-indicator {
+            bottom: 10px;
+            right: 10px;
+            left: 10px;
+            text-align: center;
+        }
+        
+        .validation-icon {
+            top: 42px;
+        }
+        
+        .btn {
+            min-height: 48px;
+            padding: 0.9rem 1.2rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .header h1 {
+            font-size: 1.5rem;
+        }
+        
+        .step-indicator {
+            margin: 1.5rem 0;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .step-label {
+            font-size: 0.7rem;
+        }
+        
+        .form-title {
+            font-size: 1.3rem;
+        }
+        
+        .exam-info-title {
+            font-size: 1.2rem;
+        }
+        
+        .exam-info-item {
+            padding: 1rem;
+        }
+        
+        .form-navigation {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-navigation .btn {
+            width: 100%;
+        }
+        
+        .container {
+            width: 95%;
+            padding: 1rem 0;
+        }
+        
+        .form-container {
+            padding: 1.5rem;
+        }
+        
+        .keyboard-hint {
+            font-size: 0.7rem;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .step-indicator {
+            gap: 0.2rem;
+        }
+        
+        .step-label {
+            font-size: 0.65rem;
+        }
+        
+        .form-container {
+            padding: 1.2rem;
+        }
+        
+        input, select, textarea {
+            padding: 0.7rem 0.9rem;
+            font-size: 0.95rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>ENEM Bíblico 2026</h1>
+            <p>Inscrições: 06/12/2025 a 08/02/2026 | Prova: 14/02/2026 às 19h</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="progress-bar" id="progress-bar"></div>
+        
+        <div class="step-indicator">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Dados Pessoais</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Perfil Bíblico</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Modalidade</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">Confirmação</div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-label">Finalização</div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <!-- Seção 1: Dados Pessoais -->
+            <div class="form-section active" id="section-1">
+                <h2 class="form-title">Dados Pessoais</h2>
+                
+                <div class="batch-errors" id="batch-errors-1"></div>
+                
+                <div class="form-group">
+                    <label for="name" class="required">Nome Completo</label>
+                    <input type="text" id="name" name="name" required 
+                           aria-describedby="name-hint name-error"
+                           maxlength="100"
+                           data-min-length="3">
+                    <span class="validation-icon" id="name-validation">✓</span>
+                    <div class="field-hint" id="name-hint">Informe seu nome completo como consta em documentos oficiais</div>
+                    <div class="field-character-count" id="name-count">0/100</div>
+                    <div class="error-message" id="name-error">Por favor, informe seu nome completo (mínimo 3 caracteres)</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone" class="required">Telefone</label>
+                        <input type="tel" id="phone" name="phone" required 
+                               placeholder="(00) 00000-0000"
+                               pattern="^\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$"
+                               inputmode="numeric">
+                        <span class="validation-icon" id="phone-validation">✓</span>
+                        <div class="error-message" id="phone-error">Por favor, informe um telefone válido com DDD (ex: (83) 99999-9999)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age" class="required">Idade</label>
+                        <input type="number" id="age" name="age" min="1" max="120" required
+                               inputmode="numeric"
+                               step="1">
+                        <span class="validation-icon" id="age-validation">✓</span>
+                        <div class="error-message" id="age-error">Por favor, informe sua idade (entre 1 e 120 anos)</div>
+                        <div class="age-warning" id="age-warning"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender" class="required">Gênero</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Selecione</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
+                    <span class="validation-icon" id="gender-validation">✓</span>
+                    <div class="error-message" id="gender-error">Por favor, selecione seu gênero</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state" class="required">Estado</label>
+                        <select id="state" name="state" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                        <span class="validation-icon" id="state-validation">✓</span>
+                        <div class="error-message" id="state-error">Por favor, selecione seu estado</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city" class="required">Cidade</label>
+                        <input type="text" id="city" name="city" required
+                               maxlength="50">
+                        <span class="validation-icon" id="city-validation">✓</span>
+                        <div class="field-character-count" id="city-count">0/50</div>
+                        <div class="error-message" id="city-error">Por favor, informe sua cidade</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address" class="required">Endereço</label>
+                    <input type="text" id="address" name="address" required
+                           maxlength="150">
+                    <span class="validation-icon" id="address-validation">✓</span>
+                    <div class="field-character-count" id="address-count">0/150</div>
+                    <div class="error-message" id="address-error">Por favor, informe seu endereço</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="neighborhood" class="required">Bairro</label>
+                        <input type="text" id="neighborhood" name="neighborhood" required
+                               maxlength="50">
+                        <span class="validation-icon" id="neighborhood-validation">✓</span>
+                        <div class="field-character-count" id="neighborhood-count">0/50</div>
+                        <div class="error-message" id="neighborhood-error">Por favor, informe seu bairro</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="houseNumber" class="required">Número</label>
+                        <input type="text" id="houseNumber" name="houseNumber" required
+                               maxlength="10"
+                               pattern="[0-9A-Za-z\-\/]+">
+                        <span class="validation-icon" id="houseNumber-validation">✓</span>
+                        <div class="error-message" id="houseNumber-error">Por favor, informe o número (pode conter letras e traços)</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="denomination" class="required">Denominação (Igreja)</label>
+                    <input type="text" id="denomination" name="denomination" required
+                           maxlength="100">
+                    <span class="validation-icon" id="denomination-validation">✓</span>
+                    <div class="field-character-count" id="denomination-count">0/100</div>
+                    <div class="error-message" id="denomination-error">Por favor, informe sua denominação</div>
+                </div>
+                
+                <div class="form-navigation">
+                    <div></div>
+                    <button type="button" class="btn btn-primary" id="next-1">
+                        Próximo <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Seção 2: Perfil Bíblico -->
+            <div class="form-section" id="section-2">
+                <h2 class="form-title">Perfil Bíblico</h2>
+                
+                <div class="batch-errors" id="batch-errors-2"></div>
+                
+                <div class="form-group">
+                    <label for="bibleStudyTime">Quanto tempo de evangelico?</label>
+                    <select id="bibleStudyTime" name="bibleStudyTime">
+                        <option value="">Selecione</option>
+                        <option value="Menos de 1 ano">Menos de 1 ano</option>
+                        <option value="1-3 anos">1-3 anos</option>
+                        <option value="3-5 anos">3-5 anos</option>
+                        <option value="5-10 anos">5-10 anos</option>
+                        <option value="Mais de 10 anos">Mais de 10 anos</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ministry">Frequenta qual ministério?</label>
+                    <input type="text" id="ministry" name="ministry" placeholder="Ex: Presbítero, Mocidade, Crianças..."
+                           maxlength="50">
+                    <div class="field-character-count" id="ministry-count">0/50</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Participa da escola bíblica?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="attendsSundaySchool-yes" name="attendsSundaySchool" value="Sim">
+                            <label for="attendsSundaySchool-yes">Sim</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="attendsSundaySchool-no" name="attendsSundaySchool" value="Não">
+                            <label for="attendsSundaySchool-no">Não</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Já fez algum curso bíblico?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="hasBiblicalCourse-yes" name="hasBiblicalCourse" value="Sim">
+                            <label for="hasBiblicalCourse-yes">Sim</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hasBiblicalCourse-no" name="hasBiblicalCourse" value="Não">
+                            <label for="hasBiblicalCourse-no">Não</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="prev-2">
+                        <span aria-hidden="true">←</span> Voltar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="next-2">
+                        Próximo <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Seção 3: Modalidade da Prova -->
+            <div class="form-section" id="section-3">
+                <h2 class="form-title">Modalidade da Prova</h2>
+                
+                <div class="batch-errors" id="batch-errors-3"></div>
+                
+                <div class="form-group">
+                    <label class="required">Selecione a modalidade:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="examModal-level1" name="examModal" value="Nível I" required>
+                            <label for="examModal-level1">Nível I</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="examModal-level2" name="examModal" value="Nível II" required>
+                            <label for="examModal-level2">Nível II</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="examModal-level3" name="examModal" value="Nível III" required>
+                            <label for="examModal-level3">Nível III</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="examModal-error">Por favor, selecione uma modalidade</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="observations">Observações (opcional)</label>
+                    <textarea id="observations" name="observations" rows="4" 
+                              placeholder="Alguma observação adicional..."
+                              maxlength="500"></textarea>
+                    <div class="field-character-count" id="observations-count">0/500</div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="prev-3">
+                        <span aria-hidden="true">←</span> Voltar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="next-3">
+                        Próximo <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Seção 4: Revisão e Confirmação -->
+            <div class="form-section" id="section-4">
+                <h2 class="form-title">Revisão e Confirmação</h2>
+                
+                <div id="locked-message" class="locked-message" style="display: none;">
+                    <strong>⚠️ Inscrição já confirmada!</strong><br>
+                    Você já realizou uma inscrição nesta sessão. Recarregue a página para uma nova inscrição.
+                </div>
+                
+                <div class="summary-section" id="summary-content">
+                    <!-- O resumo será preenchido dinamicamente -->
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="prev-4">
+                        <span aria-hidden="true">←</span> Voltar e Editar
+                    </button>
+                    <button type="button" class="btn btn-success" id="confirm-registration">
+                        <span class="btn-text">Confirmar Inscrição</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Seção 5: Finalização COM INFORMAÇÕES DA PROVA -->
+            <div class="form-section" id="section-5">
+                <div class="confirmation-section">
+                    <div class="confirmation-icon" role="img" aria-label="Inscrição confirmada">✓</div>
+                    <h2 class="form-title">Inscrição realizada com sucesso!</h2>
+                    <p>Sua inscrição no ENEM Bíblico foi confirmada. Abaixo está o seu número de inscrição:</p>
+                    <div class="registration-number" id="registration-number-display" 
+                         aria-live="polite" aria-atomic="true"></div>
+                    <p>Guarde este número para futuras consultas.</p>
+                    
+                    <!-- Informações da Prova -->
+                    <div class="exam-info-card">
+                        <h3 class="exam-info-title">📋 Informações Importantes da Prova</h3>
+                        <p style="margin-bottom: 1.5rem; opacity: 0.9;">Anote os detalhes para o dia da prova:</p>
+                        
+                        <div class="exam-info-grid">
+                            <div class="exam-info-item">
+                                <div class="exam-info-icon">📍</div>
+                                <div class="exam-info-label">LOCAL DA PROVA</div>
+                                <div class="exam-info-value">Praça João Ferreira da Silva, 317</div>
+                                <div class="exam-info-details">Centro, Tacima - Paraíba</div>
+                                <div class="exam-info-details">CEP: 58240-000</div>
+                            </div>
+                            
+                            <div class="exam-info-item">
+                                <div class="exam-info-icon">📅</div>
+                                <div class="exam-info-label">DATA DA PROVA</div>
+                                <div class="exam-info-value">14 de Fevereiro de 2026</div>
+                                <div class="exam-info-details">Sábado</div>
+                                <div class="exam-info-details">Chegar com 30min de antecedência</div>
+                            </div>
+                            
+                            <div class="exam-info-item">
+                                <div class="exam-info-icon">🕐</div>
+                                <div class="exam-info-label">HORÁRIO DA PROVA</div>
+                                <div class="exam-info-value">19:00 até 21:00</div>
+                                <div class="exam-info-details">Abertura dos portões: 18:20</div>
+                                <div class="exam-info-details">Fechamento: 18:50</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                            <p style="margin-bottom: 1rem; font-weight: bold;">📋 O que levar no dia da prova:</p>
+                            <ul style="text-align: left; display: inline-block; margin: 0 auto; padding-left: 1.5rem;">
+                                <li style="margin-bottom: 0.5rem;">Número de inscrição (acima)</li>
+                                <li style="margin-bottom: 0.5rem;">Caneta esferográfica azul ou preta (trazer 2)</li>
+                                <li style="margin-bottom: 0.5rem;">Água (em garrafa transparente)</li>
+                                 <li style="margin-bottom: 0.5rem;">Lanches</li>
+                                <li>Proibido APARELHOS DIGITAIS!⚠️</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                            <p style="margin-bottom: 0.5rem;"><strong>⚠️ Observações importantes:</strong></p>
+                            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">
+                                • Portões fecham às 18:50 - não será permitida entrada após esse horário<br>
+                                • Não será permitido uso de celular durante a prova<br>
+                                • Recomendamos chegar com 30 minutos de antecedência
+                            </p>
+                            <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 1rem;">
+                                <strong>Para dúvidas:</strong> (83) 9951-5631
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation" style="justify-content: center; margin-top: 2rem;">
+                        <button type="button" class="btn btn-secondary" id="new-registration">
+                            Recarregar para Nova Inscrição
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+<script>
+    // ============ VARIÁVEIS GLOBAIS ============
+    let currentSection = 1;
+    let registrationData = {};
+    let registrationNumber = '';
+    let autoSaveTimeout = null;
+
+    // Elementos DOM
+    const stepIndicators = document.querySelectorAll('.step');
+    const formSections = document.querySelectorAll('.form-section');
+    const summaryContent = document.getElementById('summary-content');
+    const registrationNumberDisplay = document.getElementById('registration-number-display');
+    const progressBar = document.getElementById('progress-bar');
+    const confirmButton = document.getElementById('confirm-registration');
+    const lockedMessage = document.getElementById('locked-message');
+
+    // Chaves para armazenamento
+    const STORAGE_KEYS = {
+        FORM_DATA: 'enem_biblico_form_data',
+        CURRENT_SECTION: 'enem_biblico_current_section',
+        REGISTRATION_COMPLETE: 'enem_biblico_registration_complete'
+    };
+
+    // ============ SISTEMA SIMPLIFICADO DE CONFIRMAÇÃO ============
+    function checkIfAlreadySubmitted() {
+        // Verifica se já houve uma submissão BEM-SUCEDIDA nesta sessão
+        const submitted = sessionStorage.getItem('inscricao_enviada');
+        return submitted === 'true';
+    }
+
+    function markAsSubmitted() {
+        // Marca que uma inscrição foi enviada COM SUCESSO
+        sessionStorage.setItem('inscricao_enviada', 'true');
+        
+        // Atualiza o botão de confirmação
+        if (confirmButton) {
+            confirmButton.disabled = true;
+            confirmButton.classList.add('confirmed');
+            confirmButton.innerHTML = '<span class="btn-text">✓ Inscrição Enviada</span>';
+            confirmButton.title = 'Uma inscrição já foi enviada nesta sessão';
+        }
+        
+        // Mostra mensagem na seção 4 se estiver nela
+        if (currentSection === 4 && lockedMessage) {
+            lockedMessage.style.display = 'block';
+        }
+        
+        // Notificação informativa
+        showNotification('Inscrição realizada com sucesso!', 'success');
+    }
+
+    function resetAfterReload() {
+        // Função chamada quando a página é recarregada
+        sessionStorage.removeItem('inscricao_enviada');
+        
+        if (confirmButton) {
+            confirmButton.disabled = false;
+            confirmButton.classList.remove('confirmed');
+            confirmButton.innerHTML = '<span class="btn-text">Confirmar Inscrição</span>';
+            confirmButton.title = '';
+        }
+        
+        if (lockedMessage) {
+            lockedMessage.style.display = 'none';
+        }
+    }
+
+    // ============ SISTEMA DE SALVAMENTO E ENVIO ============
+    async function submitToGoogleSheets() {
+        const URL = 'https://script.google.com/macros/s/AKfycbwUp174sDiFtn-NNXVFiC8KH3BlOyjt3XizKoQSeF_1rQSaibiia3pc1gDux9ISWNm-/exec';
+        
+        try {
+            const registrationNumber = generateRegistrationNumber();
+            
+            const dataToSend = {
+                ...registrationData,
+                registrationNumber: registrationNumber,
+                dataProva: '14 de Fevereiro de 2026',
+                localProva: 'Praça João Ferreira da Silva, 317 - Centro, Tacima-PB',
+                horarioProva: '19:00 até 21:00'
+            };
+            
+            const response = await fetch(URL, {
+                method: 'POST',
+                body: JSON.stringify(dataToSend)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                return true;
+            } else {
+                console.error('Erro no servidor:', result.error);
+                return false;
+            }
+            
+        } catch (error) {
+            console.log('Erro ao enviar:', error);
+            return false;
+        }
+    }
+
+    function saveFormData() {
+        updateRegistrationData();
+        const formData = {
+            registrationData: registrationData,
+            currentSection: currentSection
+        };
+        localStorage.setItem(STORAGE_KEYS.FORM_DATA, JSON.stringify(formData));
+        showAutoSaveIndicator();
+    }
+
+    function loadFormData() {
+        const savedData = localStorage.getItem(STORAGE_KEYS.FORM_DATA);
+        const registrationComplete = localStorage.getItem(STORAGE_KEYS.REGISTRATION_COMPLETE);
+        
+        // Se houve uma inscrição completa, limpa tudo
+        if (registrationComplete === 'true') {
+            clearFormData();
+            return;
+        }
+        
+        if (savedData) {
+            try {
+                const formData = JSON.parse(savedData);
+                registrationData = formData.registrationData || {};
+                currentSection = formData.currentSection || 1;
+                
+                populateFormFields();
+                navigateToSection(currentSection, true);
+                
+                showNotification('Dados recuperados automaticamente.', 'success');
+            } catch (error) {
+                console.error('Erro ao carregar dados salvos:', error);
+                clearFormData();
+            }
+        }
+        
+        // Verifica se já houve uma inscrição enviada
+        if (checkIfAlreadySubmitted()) {
+            // Apenas atualiza o botão de confirmação
+            if (confirmButton) {
+                confirmButton.disabled = true;
+                confirmButton.classList.add('confirmed');
+                confirmButton.innerHTML = '<span class="btn-text">✓ Inscrição Enviada</span>';
+                confirmButton.title = 'Uma inscrição já foi enviada nesta sessão';
+            }
+            
+            // Mostra notificação informativa
+            showNotification('Uma inscrição já foi enviada nesta sessão. Recarregue a página para uma nova inscrição.', 'warning');
+        }
+    }
+
+    function populateFormFields() {
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            if (field.type === 'radio') {
+                if (registrationData[field.name] === field.value) {
+                    field.checked = true;
+                }
+            } else if (field.type !== 'button') {
+                field.value = registrationData[field.name] || '';
+            }
+        });
+        
+        updateAllCharacterCounts();
+        validateAllFieldsInCurrentSection();
+    }
+
+    function clearFormData() {
+        localStorage.removeItem(STORAGE_KEYS.FORM_DATA);
+        localStorage.removeItem(STORAGE_KEYS.CURRENT_SECTION);
+        localStorage.removeItem(STORAGE_KEYS.REGISTRATION_COMPLETE);
+        registrationData = {};
+        currentSection = 1;
+    }
+
+    function markRegistrationComplete() {
+        localStorage.setItem(STORAGE_KEYS.REGISTRATION_COMPLETE, 'true');
+        clearFormData();
+    }
+
+    function showAutoSaveIndicator() {
+        const autoSaveIndicator = document.getElementById('auto-save-indicator');
+        if (autoSaveIndicator) {
+            autoSaveIndicator.classList.add('show');
+            setTimeout(() => {
+                autoSaveIndicator.classList.remove('show');
+            }, 2000);
+        }
+    }
+
+    // ============ SISTEMA DE NAVEGAÇÃO SIMPLIFICADO ============
+    function navigateToSection(sectionNumber, skipValidation = false) {
+        // Verificação simples: se já enviou uma inscrição, apenas mostra mensagem
+        // mas permite navegar para revisão
+        if (checkIfAlreadySubmitted() && sectionNumber === 4) {
+            if (lockedMessage) {
+                lockedMessage.style.display = 'block';
+            }
+        }
+        
+        // Validação apenas ao ir para frente
+        if (sectionNumber > currentSection && !skipValidation) {
+            if (!validateCurrentSectionWithBatch()) {
+                return;
+            }
+        }
+        
+        // Atualiza indicadores de passo
+        stepIndicators.forEach(step => {
+            const stepNumber = parseInt(step.getAttribute('data-step'));
+            step.classList.toggle('active', stepNumber === sectionNumber);
+        });
+        
+        // Mostra a seção correta
+        formSections.forEach(section => {
+            section.classList.toggle('active', section.id === `section-${sectionNumber}`);
+        });
+        
+        currentSection = sectionNumber;
+        updateProgressBar();
+        saveFormData();
+        
+        // Rola suavemente para o topo do formulário
+        setTimeout(() => {
+            const formContainer = document.querySelector('.form-container');
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const scrollPosition = formContainer.offsetTop - headerHeight - 20;
+            
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+        }, 100);
+        
+        // Ações específicas por seção
+        if (sectionNumber === 4) {
+            updateRegistrationData();
+            updateSummary();
+        }
+        
+        if (sectionNumber === 5) {
+            generateRegistrationNumber();
+            markRegistrationComplete();
+        }
+        
+        // Foco no primeiro campo
+        setTimeout(() => {
+            const firstInput = document.querySelector(`#section-${sectionNumber} input, #section-${sectionNumber} select`);
+            if (firstInput && firstInput.type !== 'radio') {
+                firstInput.focus();
+            }
+        }, 300);
+    }
+
+    function updateProgressBar() {
+        const progress = ((currentSection - 1) / 4) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+
+    // ============ SISTEMA DE VALIDAÇÃO (mantido) ============
+    function validateCurrentSectionWithBatch() {
+        const currentSectionElement = document.getElementById(`section-${currentSection}`);
+        const requiredFields = currentSectionElement.querySelectorAll('[required]');
+        let isValid = true;
+        const errors = [];
+        
+        // Limpa erros anteriores
+        const errorMessages = currentSectionElement.querySelectorAll('.error-message');
+        errorMessages.forEach(error => {
+            error.style.display = 'none';
+        });
+        
+        const errorFields = currentSectionElement.querySelectorAll('.error');
+        errorFields.forEach(field => {
+            field.classList.remove('error');
+        });
+        
+        const batchErrorsContainer = document.getElementById(`batch-errors-${currentSection}`);
+        if (batchErrorsContainer) {
+            batchErrorsContainer.classList.remove('show');
+            batchErrorsContainer.innerHTML = '';
+        }
+        
+        // Valida campos obrigatórios
+        requiredFields.forEach(field => {
+            const fieldId = field.id || field.name;
+            const fieldName = field.labels ? field.labels[0].textContent.replace(' *', '') : fieldId;
+            
+            if (!field.value.trim()) {
+                errors.push(`${fieldName} é obrigatório`);
+                field.classList.add('error');
+                isValid = false;
+            }
+        });
+        
+        // Validações específicas da seção 1
+        if (currentSection === 1) {
+            const phoneField = document.getElementById('phone');
+            const phoneValue = phoneField.value.replace(/\D/g, '');
+            if (phoneValue.length < 10 || phoneValue.length > 11) {
+                errors.push('Telefone inválido. Informe um número com DDD + 8 ou 9 dígitos');
+                phoneField.classList.add('error');
+                isValid = false;
+            }
+            
+            const ageField = document.getElementById('age');
+            const ageValue = parseInt(ageField.value);
+            if (ageValue < 1 || ageValue > 120) {
+                errors.push('Idade inválida. Informe uma idade entre 1 e 120 anos');
+                ageField.classList.add('error');
+                isValid = false;
+            }
+            
+            const nameField = document.getElementById('name');
+            if (nameField.value.trim().length < 3) {
+                errors.push('Nome muito curto. Mínimo 3 caracteres');
+                nameField.classList.add('error');
+                isValid = false;
+            }
+        }
+        
+        // Validação específica da seção 3
+        if (currentSection === 3) {
+            const radioGroup = document.querySelector('input[name="examModal"]:checked');
+            if (!radioGroup) {
+                errors.push('Selecione uma modalidade');
+                isValid = false;
+            }
+        }
+        
+        // Mostra erros em lote
+        if (errors.length > 0 && batchErrorsContainer) {
+            batchErrorsContainer.innerHTML = `
+                <h4>${errors.length} erro${errors.length > 1 ? 's' : ''} encontrado${errors.length > 1 ? 's' : ''}:</h4>
+                <ul>
+                    ${errors.map(error => `<li>${error}</li>`).join('')}
+                </ul>
+            `;
+            batchErrorsContainer.classList.add('show');
+            
+            setTimeout(() => {
+                batchErrorsContainer.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+            }, 100);
+        }
+        
+        return isValid;
+    }
+
+    // ============ VALIDAÇÃO EM TEMPO REAL (mantida) ============
+    function setupRealTimeValidation() {
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    formattedValue = `(${value}`;
+                } else if (value.length <= 6) {
+                    formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+                } else if (value.length <= 10) {
+                    formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+                } else {
+                    formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+                }
+            }
+            e.target.value = formattedValue;
+            
+            validatePhoneField();
+            scheduleAutoSave();
+        });
+        
+        // Outros eventos de validação...
+        document.getElementById('age').addEventListener('input', function() {
+            validateAgeField();
+            scheduleAutoSave();
+        });
+        
+        document.getElementById('name').addEventListener('input', function() {
+            validateNameField();
+            updateCharacterCount('name');
+            scheduleAutoSave();
+        });
+        
+        const fieldsWithCount = ['city', 'address', 'neighborhood', 'denomination', 'ministry', 'observations'];
+        fieldsWithCount.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('input', function() {
+                    updateCharacterCount(fieldId);
+                    scheduleAutoSave();
+                });
+            }
+        });
+        
+        document.querySelectorAll('[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                validateField(this);
+                scheduleAutoSave();
+            });
+        });
+        
+        // Eventos para campos de rádio
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                scheduleAutoSave();
+            });
+        });
+    }
+
+    // Funções de validação de campos (mantidas)
+    function validateField(field) {
+        const fieldId = field.id || field.name;
+        const validationIcon = document.getElementById(`${fieldId}-validation`);
+        const errorElement = document.getElementById(`${fieldId}-error`);
+        
+        if (!field.value.trim() && field.hasAttribute('required')) {
+            field.classList.remove('valid');
+            field.classList.add('error');
+            if (validationIcon) {
+                validationIcon.classList.remove('valid');
+                validationIcon.classList.add('invalid');
+                validationIcon.textContent = '✗';
+            }
+            if (errorElement) {
+                errorElement.style.display = 'block';
+            }
+            return false;
+        } else {
+            field.classList.remove('error');
+            field.classList.add('valid');
+            if (validationIcon) {
+                validationIcon.classList.remove('invalid');
+                validationIcon.classList.add('valid');
+                validationIcon.textContent = '✓';
+            }
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+            
+            if (fieldId === 'phone') return validatePhoneField();
+            if (fieldId === 'age') return validateAgeField();
+            if (fieldId === 'name') return validateNameField();
+            if (field.name === 'examModal') return validateModalidadeField();
+            
+            return true;
+        }
+    }
+
+    function validatePhoneField() {
+        const phoneField = document.getElementById('phone');
+        const validationIcon = document.getElementById('phone-validation');
+        const errorElement = document.getElementById('phone-error');
+        const phoneValue = phoneField.value.replace(/\D/g, '');
+        const isValid = phoneValue.length === 10 || phoneValue.length === 11;
+        
+        if (isValid) {
+            phoneField.classList.remove('error');
+            phoneField.classList.add('valid');
+            if (validationIcon) {
+                validationIcon.classList.remove('invalid');
+                validationIcon.classList.add('valid');
+                validationIcon.textContent = '✓';
+            }
+            if (errorElement) errorElement.style.display = 'none';
+        } else if (phoneField.value.trim()) {
+            phoneField.classList.remove('valid');
+            phoneField.classList.add('error');
+            if (validationIcon) {
+                validationIcon.classList.remove('valid');
+                validationIcon.classList.add('invalid');
+                validationIcon.textContent = '✗';
+            }
+            if (errorElement) {
+                errorElement.textContent = 'Telefone inválido. Informe um número com DDD + 8 ou 9 dígitos';
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        return isValid;
+    }
+
+    function validateAgeField() {
+        const ageField = document.getElementById('age');
+        const validationIcon = document.getElementById('age-validation');
+        const errorElement = document.getElementById('age-error');
+        const ageValue = parseInt(ageField.value) || 0;
+        const isValid = ageValue >= 1 && ageValue <= 120;
+        
+        if (isValid) {
+            ageField.classList.remove('error');
+            ageField.classList.add('valid');
+            if (validationIcon) {
+                validationIcon.classList.remove('invalid');
+                validationIcon.classList.add('valid');
+                validationIcon.textContent = '✓';
+            }
+            if (errorElement) errorElement.style.display = 'none';
+        } else if (ageField.value.trim()) {
+            ageField.classList.remove('valid');
+            ageField.classList.add('error');
+            if (validationIcon) {
+                validationIcon.classList.remove('valid');
+                validationIcon.classList.add('invalid');
+                validationIcon.textContent = '✗';
+            }
+            if (errorElement) {
+                errorElement.textContent = 'Idade inválida. Informe uma idade entre 1 e 120 anos';
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        return isValid;
+    }
+
+    function validateNameField() {
+        const nameField = document.getElementById('name');
+        const validationIcon = document.getElementById('name-validation');
+        const errorElement = document.getElementById('name-error');
+        const nameValue = nameField.value.trim();
+        const isValid = nameValue.length >= 3;
+        
+        if (isValid) {
+            nameField.classList.remove('error');
+            nameField.classList.add('valid');
+            if (validationIcon) {
+                validationIcon.classList.remove('invalid');
+                validationIcon.classList.add('valid');
+                validationIcon.textContent = '✓';
+            }
+            if (errorElement) errorElement.style.display = 'none';
+        } else if (nameField.value.trim()) {
+            nameField.classList.remove('valid');
+            nameField.classList.add('error');
+            if (validationIcon) {
+                validationIcon.classList.remove('valid');
+                validationIcon.classList.add('invalid');
+                validationIcon.textContent = '✗';
+            }
+            if (errorElement) {
+                errorElement.textContent = 'Nome muito curto. Mínimo 3 caracteres';
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        return isValid;
+    }
+
+    function validateModalidadeField() {
+        const selectedModal = document.querySelector('input[name="examModal"]:checked');
+        const errorElement = document.getElementById('examModal-error');
+        
+        if (selectedModal) {
+            if (errorElement) errorElement.style.display = 'none';
+            return true;
+        } else {
+            if (errorElement) {
+                errorElement.style.display = 'block';
+            }
+            return false;
+        }
+    }
+
+    function validateAllFieldsInCurrentSection() {
+        const currentSectionElement = document.getElementById(`section-${currentSection}`);
+        if (!currentSectionElement) return;
+        
+        currentSectionElement.querySelectorAll('input, select, textarea').forEach(field => {
+            if (field.value.trim() || field.hasAttribute('required')) {
+                validateField(field);
+            }
+        });
+    }
+
+    // ============ CONTADOR DE CARACTERES ============
+    function updateCharacterCount(fieldId) {
+        const field = document.getElementById(fieldId);
+        const countElement = document.getElementById(`${fieldId}-count`);
+        
+        if (!field || !countElement) return;
+        
+        const maxLength = field.getAttribute('maxlength') || 100;
+        const currentLength = field.value.length;
+        const percentage = (currentLength / maxLength) * 100;
+        
+        countElement.textContent = `${currentLength}/${maxLength}`;
+        countElement.classList.remove('near-limit', 'over-limit');
+        
+        if (percentage > 90) {
+            countElement.classList.add('over-limit');
+        } else if (percentage > 70) {
+            countElement.classList.add('near-limit');
+        }
+    }
+
+    function updateAllCharacterCounts() {
+        const fields = ['name', 'city', 'address', 'neighborhood', 'denomination', 'ministry', 'observations'];
+        fields.forEach(fieldId => updateCharacterCount(fieldId));
+    }
+
+    // ============ RESUMO E NÚMERO DE INSCRIÇÃO ============
+    function updateSummary() {
+        updateRegistrationData();
+        
+        let summaryHTML = '';
+        
+        summaryHTML += `
+            <div class="summary-item">
+                <div class="summary-label">Dados Pessoais</div>
+                <div class="summary-value">
+                    <strong>Nome:</strong> ${registrationData.name || 'Não informado'}<br>
+                    <strong>Telefone:</strong> ${registrationData.phone || 'Não informado'}<br>
+                    <strong>Idade:</strong> ${registrationData.age || 'Não informado'}<br>
+                    <strong>Gênero:</strong> ${registrationData.gender || 'Não informado'}<br>
+                    <strong>Estado:</strong> ${registrationData.state || 'Não informado'}<br>
+                    <strong>Cidade:</strong> ${registrationData.city || 'Não informado'}<br>
+                    <strong>Endereço:</strong> ${registrationData.address || 'Não informado'}<br>
+                    <strong>Bairro:</strong> ${registrationData.neighborhood || 'Não informado'}<br>
+                    <strong>Número:</strong> ${registrationData.houseNumber || 'Não informado'}<br>
+                    <strong>Denominação:</strong> ${registrationData.denomination || 'Não informado'}
+                </div>
+            </div>
+        `;
+        
+        summaryHTML += `
+            <div class="summary-item">
+                <div class="summary-label">Perfil Bíblico</div>
+                <div class="summary-value">
+                    <strong>Tempo de estudo:</strong> ${registrationData.bibleStudyTime || 'Não informado'}<br>
+                    <strong>Ministério:</strong> ${registrationData.ministry || 'Não informado'}<br>
+                    <strong>Escola bíblica:</strong> ${registrationData.attendsSundaySchool || 'Não informado'}<br>
+                    <strong>Curso bíblico:</strong> ${registrationData.hasBiblicalCourse || 'Não informado'}
+                </div>
+            </div>
+        `;
+        
+        summaryHTML += `
+            <div class="summary-item">
+                <div class="summary-label">Modalidade e Observações</div>
+                <div class="summary-value">
+                    <strong>Modalidade:</strong> ${registrationData.examModal || 'Não informado'}<br>
+                    <strong>Observações:</strong> ${registrationData.observations || 'Nenhuma'}
+                </div>
+            </div>
+        `;
+        
+        summaryContent.innerHTML = summaryHTML;
+    }
+
+    function updateRegistrationData() {
+        document.querySelectorAll('input[type="text"], input[type="tel"], input[type="number"], select, textarea').forEach(field => {
+            if (field.type !== 'button') {
+                registrationData[field.name] = field.value;
+            }
+        });
+        
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            if (radio.checked) {
+                registrationData[radio.name] = radio.value;
+            }
+        });
+    }
+
+    function generateRegistrationNumber() {
+        const now = new Date();
+        const dateString = now.toISOString().slice(0, 10).replace(/-/g, '');
+        const randomPart = Math.floor(100000 + Math.random() * 900000);
+        const number = `ENEMBIBL-${dateString}-${randomPart}`;
+        
+        registrationNumberDisplay.textContent = number;
+        registrationNumber = number;
+        
+        return number;
+    }
+
+    // ============ UTILITÁRIOS ============
+    function showNotification(message, type = 'success') {
+        let notification = document.getElementById('notification');
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.id = 'notification';
+            notification.className = 'notification';
+            document.body.appendChild(notification);
+        }
+        
+        notification.textContent = message;
+        notification.className = `notification ${type} show`;
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
+    }
+
+    function scheduleAutoSave() {
+        if (autoSaveTimeout) {
+            clearTimeout(autoSaveTimeout);
+        }
+        autoSaveTimeout = setTimeout(() => {
+            updateRegistrationData();
+            saveFormData();
+        }, 800);
+    }
+
+    // ============ EVENT LISTENERS ============
+    document.addEventListener('DOMContentLoaded', function() {
+        // RESETA o estado ao carregar a página
+        resetAfterReload();
+        
+        // Carrega dados salvos
+        loadFormData();
+        setupRealTimeValidation();
+        updateProgressBar();
+        
+        // Eventos de navegação
+        document.getElementById('next-1').addEventListener('click', function() {
+            navigateToSection(2);
+        });
+        document.getElementById('next-2').addEventListener('click', function() {
+            navigateToSection(3);
+        });
+        document.getElementById('next-3').addEventListener('click', function() {
+            navigateToSection(4);
+        });
+        
+        document.getElementById('prev-2').addEventListener('click', function() {
+            navigateToSection(1);
+        });
+        document.getElementById('prev-3').addEventListener('click', function() {
+            navigateToSection(2);
+        });
+        document.getElementById('prev-4').addEventListener('click', function() {
+            navigateToSection(3);
+        });
+
+        // Evento de confirmação de inscrição - SIMPLIFICADO
+        document.getElementById('confirm-registration').addEventListener('click', async function() {
+            const button = this;
+            const buttonText = button.querySelector('.btn-text');
+            
+            // Verificação SIMPLES: já enviou nesta sessão?
+            if (checkIfAlreadySubmitted()) {
+                showNotification('Uma inscrição já foi enviada nesta sessão. Recarregue a página para uma nova inscrição.', 'warning');
+                return;
+            }
+            
+            // Validação dos campos
+            if (!validateCurrentSectionWithBatch()) {
+                showNotification('Corrija os erros antes de confirmar.', 'error');
+                return;
+            }
+            
+            // Prepara o botão para envio
+            button.disabled = true;
+            button.classList.add('btn-loading');
+            if (buttonText) buttonText.style.visibility = 'hidden';
+            
+            try {
+                // Atualiza dados
+                updateRegistrationData();
+                
+                // Envia para o Google Sheets
+                const success = await submitToGoogleSheets();
+                
+                if (success) {
+                    // Marca como enviado COM SUCESSO
+                    markAsSubmitted();
+                    
+                    // Navega para confirmação
+                    navigateToSection(5);
+                    showNotification('Inscrição realizada com sucesso!', 'success');
+                } else {
+                    // Falha no envio - permite tentar novamente
+                    button.disabled = false;
+                    button.classList.remove('btn-loading');
+                    if (buttonText) buttonText.style.visibility = 'visible';
+                    showNotification('Erro ao enviar inscrição. Tente novamente.', 'error');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                // Falha na conexão - permite tentar novamente
+                button.disabled = false;
+                button.classList.remove('btn-loading');
+                if (buttonText) buttonText.style.visibility = 'visible';
+                showNotification('Erro de conexão. Tente novamente.', 'error');
+            }
+        });
+
+        // Evento para nova inscrição
+        document.getElementById('new-registration').addEventListener('click', function() {
+            const userConfirmed = confirm('Para realizar uma nova inscrição, é necessário recarregar a página. Deseja recarregar agora?');
+            
+            if (userConfirmed) {
+                location.reload();
+            }
+        });
+        
+        // Foco no primeiro campo
+        setTimeout(() => {
+            const firstInput = document.querySelector('#section-1 input, #section-1 select');
+            if (firstInput) firstInput.focus();
+        }, 500);
+    });
+</script>
+</body>
+</html>

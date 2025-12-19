@@ -788,6 +788,126 @@
             line-height: 1.5;
         }
 
+         /* Estilos para o filtro */
+        .news-filter {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            background: #e9e9e9;
+            border-color: #ccc;
+        }
+
+        .filter-btn.active {
+            background: #2c5aa0; /* Cor da prefeitura */
+            color: white;
+            border-color: #2c5aa0;
+        }
+
+        /* Transições para os itens */
+        [data-category] {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Estilos para as tags de notícias */
+        .news-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .news-tag.evento {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .news-tag.concluido {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .news-tag.campanha {
+            background: #2196F3;
+            color: white;
+        }
+
+        /* Estilos para o filtro */
+        .news-filter {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            background: #e9e9e9;
+            border-color: #ccc;
+        }
+
+        .filter-btn.active {
+            background: #2c5aa0; /* Cor da prefeitura */
+            color: white;
+            border-color: #2c5aa0;
+        }
+
+        /* Transições para os itens */
+        [data-category] {
+            transition: all 0.3s ease;
+        }
+
+        /* Estilos para as tags de notícias */
+        .news-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .news-tag.evento {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .news-tag.concluido {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .news-tag.campanha {
+            background: #2196F3;
+            color: white;
+        }
+
         /* Galeria Section */
         .gallery-section {
             padding: 5rem 0;
@@ -1386,7 +1506,8 @@
     <header id="mainHeader">
         <div class="container header-content">
             <div class="logo">
-                <h1>Assembleia de Deus em Tacima-PB</h1>
+                <img src="src/img/logoo-remove-ad.png" alt="Logo Assembleia de Deus Tacima-PB" style="height: 40px;">
+                <h1>ADPBT</h1>
             </div>
             
             <!-- Menu Desktop -->
@@ -1458,57 +1579,56 @@
             <div class="news-header">
                 <h2>Notícias e Eventos</h2>
                 <div class="news-filter">
-                    <button class="filter-btn active">Todos</button>
-                    <button class="filter-btn">Eventos</button>
-                    <button class="filter-btn">Notícias</button>
-                    <button class="filter-btn">Cultos</button>
+                    <button class="filter-btn active" data-filter="todos">Todos</button>
+                    <button class="filter-btn" data-filter="eventos">Eventos</button>
+                    <button class="filter-btn" data-filter="noticias">Notícias</button>
                 </div>
             </div>
 
             <div class="news-grid">
                 <div class="main-news">
                     <!-- Notícia em Destaque -->
-                    <div class="featured-news">
+                    <div class="featured-news" data-category="eventos">
                         <div class="featured-image">
-                            <img src="src/img/logoenem.jpg" alt="ENEM Bíblico">
+                            <a href="src/html/InscriçõesEnem.html"><img src="src/img/logoenem.jpg" alt="ENEM Bíblico"></a>
                         </div>
                         <div class="featured-content">
-                            <div class="news-date">04 de Janeiro de 2025</div>
-                            <h3>ENEM Bíblico 2025 - Inscrições Abertas</h3>
+                            <div class="news-date">14 de Fevereiro de 2026</div>
+                            <h3>ENEM Bíblico 2026 - Inscrições Abertas</h3>
                             <p>Participe do nosso ENEM Bíblico na Assembleia de Deus em Tacima-PB. Uma oportunidade única para testar seus conhecimentos bíblicos e aprender mais sobre a palavra de Deus. Evento gratuito e aberto a toda comunidade.</p>
                             <div class="news-meta">
-                                <a href="tteessttee.html " class="read-more">
+                                <a href="src/html/InscriçõesEnem.html" class="read-more">
                                     Ler mais 
                                     <span>→</span>
                                 </a>
-                                <span>Evento</span>
+                                <span class="news-tag evento">Evento</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Notícias Secundárias -->
                     <div class="secondary-news">
-                        <div class="news-item">
+                        <div class="news-item" data-category="noticias">
                             <h4>Ar-Condicionados Adquiridos - 2025</h4>
                             <p>Com grande alegria informamos que os novos ar-condicionados para o nosso templo já foram adquiridos! Em breve teremos um ambiente mais climatizado e confortável para todos os irmãos durante os cultos e atividades.</p>
                             <div class="news-meta">
-                                <a href="#" class="read-more">
+                                <a href="src/html/ar-condicionados.html" class="read-more">
                                     Ler mais 
                                     <span>→</span>
                                 </a>
-                                <span>Concluído</span>
+                                <span class="news-tag concluido">Concluído</span>
                             </div>
                         </div>
 
-                        <div class="news-item">
+                        <div class="news-item" data-category="noticias">
                             <h4>Campanha do Carro Missionário - 2025</h4>
                             <p>Junte-se a nós nesta campanha para adquirir um carro que será uma ferramenta poderosa na obra de Deus! O veículo será usado para: visitas pastorais, evangelismo, transporte de irmãos para cultos e auxílio em ações sociais. Cada contribuição nos aproxima deste objetivo!</p>
                             <div class="news-meta">
-                                <a href="#" class="read-more">
+                                <a href="src/html/camp-carro.html" class="read-more">
                                     Ler mais 
                                     <span>→</span>
                                 </a>
-                                <span>Campanha</span>
+                                <span class="news-tag campanha">Campanha</span>
                             </div>
                         </div>
                     </div>
@@ -1516,9 +1636,15 @@
 
                 <!-- Sidebar -->
                 <div class="news-sidebar">
-                    <div class="sidebar-card">
+                    <div class="sidebar-card" data-category="eventos">
                         <h4>Próximos Eventos</h4>
                         <ul class="news-list">
+                            <li>
+                                <a href="#">
+                                    <span>Realização da prova - ENEM Bíblico </span>
+                                    <span class="date">14/02</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="#">
                                     <span>Culto de Ano Novo</span>
@@ -1527,30 +1653,24 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span>Ensaio do Coral</span>
-                                    <span class="date">12/12</span>
+                                    <span>Confraternização da Igreja</span>
+                                    <span class="date">27/12</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span>Escola Bíblica</span>
-                                    <span class="date">Todos os domingos</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span>Culto de Oração</span>
-                                    <span class="date">Quartas 19h</span>
+                                    <span>Culto no Sítio - Gravatar e Capoeira</span>
+                                    <span class="date">09 e 16 /12</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="sidebar-card">
+                    <div class="sidebar-card" data-category="noticias">
                         <h4>Notícias Recentes</h4>
                         <ul class="news-list">
                             <li>
-                                <a href="#">
+                                <a href="tteessttee.html">
                                     <span>ENEM Bíblico - Inscrições Abertas</span>
                                     <span class="date">04/01/26</span>
                                 </a>
@@ -1562,7 +1682,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="ar-condicionados.html">
                                     <span>Aquisição de Ar-Condicionados</span>
                                     <span class="date">15/04/25</span>
                                 </a>
@@ -1584,7 +1704,6 @@
             
             <div class="services-container">
                 <div class="services-list">
-
                     <!-- Segunda-feira -->
                     <div class="service-day" id="segunda">
                         <div class="service-info">
@@ -1639,7 +1758,7 @@
                     <div class="service-day" id="sabado">
                         <div class="service-info">
                             <div class="service-day-name">Sábado</div>
-                            <div class="service-description">Ensaios e Treinamentos</div>
+                            <div class="service-description">Ensaios dos Departamentos</div>
                         </div>
                         <div class="service-time">19:00 - 21:00</div>
                         <div class="cult-status" id="status-sabado"></div>
@@ -1649,7 +1768,7 @@
                     <div class="service-day" id="domingo">
                         <div class="service-info">
                             <div class="service-day-name">Domingo</div>
-                            <div class="service-description">Culto de Celebração e Santa Ceia</div>
+                            <div class="service-description">Culto de Jovens</div>
                         </div>
                         <div class="service-time">19:00 - 21:00</div>
                         <div class="service-badge">Principal</div>
@@ -1683,7 +1802,7 @@
 
                 <div class="leader-card">
                     <div class="leader-image">
-                        <img src="src/img/pastorl.jpg" alt="Pastora">
+                        <img src="src/img/pastorlocal.jpg" alt="Pastor local">
                     </div>
                     <div class="leader-info">
                         <h3>Pr. Eliezer Pereira França</h3>
@@ -1706,19 +1825,25 @@
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="src/img/culto1.jpg" alt="Culto de Domingo">
+                    <img src="src/img/Criança .jpg" alt="Crianças">
                     <div class="gallery-overlay">
-                        <h4>Cultos da semana</h4>
+                        <h4>Criança</h4>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="src/img/evento1.jpg" alt="ENEM Bíblico">
+                    <img src="src/img/Mocidade .jpg" alt="Mocidade">
                     <div class="gallery-overlay">
-                        <h4>Semana Pentecostal</h4>
+                        <h4>Mocidade</h4>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="src/img/jovens1.jpg" alt="Retiro de Jovens">
+                    <img src="src/img/Senhora.jpg" alt="Senhora">
+                    <div class="gallery-overlay">
+                        <h4>Senhora</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="src/img/desfilebíblico .jpg" alt="Desfile Bíblico">
                     <div class="gallery-overlay">
                         <h4>Desfile - Dia da Bíblia</h4>
                     </div>
@@ -2110,15 +2235,45 @@
             }
         });
 
-        // Filtro de notícias
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                // Aqui você pode adicionar a lógica para filtrar as notícias
+        // Função para filtrar os conteúdos
+        function initFilter() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const allItems = document.querySelectorAll('[data-category]');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Adiciona active class ao botão clicado
+                    button.classList.add('active');
+                    
+                    // Obtém o filtro selecionado
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Filtra os itens
+                    if (filter === 'todos') {
+                        // Mostra todos os itens
+                        allItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                    } else {
+                        // Mostra apenas os itens da categoria selecionada
+                        allItems.forEach(item => {
+                            const itemCategory = item.getAttribute('data-category');
+                            if (itemCategory === filter) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
             });
-        });
+        }
+
+        // Inicializa o filtro quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', initFilter);
 
         // Sistema para destacar o culto do dia atual
         function highlightTodayService() {
